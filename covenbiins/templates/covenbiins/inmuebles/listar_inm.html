@@ -1,0 +1,64 @@
+{% extends 'covenbiins/base2.html' %}
+
+{% load static %}
+
+{% block titul %} Inmuebles {% endblock %}
+
+{% block contenedor %}
+  <br>
+  <div class="container-fluid">
+    <a class="btn btn-success" href="{% url 'covenbiins:form_inmuebles' %}">Crear</a>
+
+    <form class="d-flex mt-2 mb-4" role="search" method="post" action="{% url 'covenbiins:inmuebles_buscar' %}">
+      {% csrf_token %}
+      <input class="form-control me-2" type="search" placeholder="Buscar por id" aria-label="Search" name="buscar" value="{{ buscado }}">
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+
+
+  {% if data %}
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Tipo Inmueble</th>
+        <th>Precio</th>
+        <th>Usuario</th>
+        <th>Acciones</th>
+      </tr>
+    {% for i in data %}
+      <tr>
+        <td>{{ i.id_Inmueble }}</td>
+        <td>{{ i.nombre }}</td>
+        <td>{{ i.tipoInmueble }}</td>
+        <td>{{ i.precio }}</td>
+        <td>{{ i.cedula }}</td>
+        <td>
+          <a href="{% url 'covenbiins:inmuebles_editar' i.id_Inmueble %}" class="btn btn-outline-info">Editar</a>
+          <a href="javascript:confirmar_eliminar('{% url 'covenbiins:inmuebles_eliminar' i.id_Inmueble %}');" class="btn btn-outline-danger">Eliminar</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+  {% else %}
+    NO hay registros....
+  {% endif %}
+</div>
+{% endblock %}

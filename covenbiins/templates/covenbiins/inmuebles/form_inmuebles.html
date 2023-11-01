@@ -1,0 +1,58 @@
+{% extends 'covenbiins/base2.html' %}
+
+{% load static %}
+
+{% block titul %} Registro Inmuebles {% endblock %}
+
+{% block contenedor %}
+
+    {% if id %}
+        <h3>Editar: {{ id }}</h3>
+    {% endif %}
+
+    <form action="{% url 'covenbiins:inmuebles_guardar' %}" method="post">
+        {% csrf_token %}
+
+        <input type="hidden" name="id" value="{{ data.id_Inmueble}}">
+
+        <div class="mb-2 mt-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" aria-describedby="Nombre" value="{{ data.nombre }}">
+        </div>
+
+         <div class="mb-2">
+            <label class="form-label">Precio</label>
+            <input type="text" class="form-control" name="precio" aria-describedby="Precio" value="{{ data.precio }}">
+        </div>
+
+         <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <input type="text" class="form-control" name="descripcion" aria-describedby="descripcion" value="{{ data.descripcion }}">
+        </div>
+
+         <div class="mb-3">
+            <label class="form-label">Dirección</label>
+            <input type="text" class="form-control" name="direccion" aria-describedby="direccion" value="{{ data.direccion }}">
+        </div>
+
+        <select name="tipo" class="form-select mb-3" aria-label="Default select example">
+          <option selected>Tipo Inmueble</option>
+          <option value="1">Apartamento</option>
+          <option value="2">Casa</option>
+          <option value="3">Lote</option>
+        </select>
+        <select name="usuario" class="form-select">
+            <option selected>Usuario</option>
+            {% for i in usuarios %}
+                <option value="{{ i.cedula }}"{% if data.Usuarios.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        {% if id %}
+            <button type="submit" class="btn btn-outline-success">Actualizar</button>
+        {% else %}
+            <button type="submit" class="btn btn-outline-success">Crear</button>
+        {% endif %}
+
+    </form>
+{% endblock %}

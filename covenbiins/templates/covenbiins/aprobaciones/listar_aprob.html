@@ -1,0 +1,62 @@
+{% extends 'covenbiins/base2.html' %}
+
+{% load static %}
+
+{% block titul %} Aprobaciones {% endblock %}
+
+{% block contenedor %}
+  <br>
+  <div class="container-fluid">
+    <a class="btn btn-success" href="#">Crear</a>
+
+    <form class="d-flex mt-2 mb-4" role="search" method="post" action="{% url 'covenbiins:aprobaciones_buscar' %}">
+      {% csrf_token %}
+      <input class="form-control me-2" type="search" placeholder="Buscar por id" aria-label="Search" name="buscar" value="{{ buscado }}">
+      <button class="btn btn-outline-success" type="submit">Buscar</button>
+    </form>
+
+
+  {% if data %}
+    <table class="table table-striped">
+      <tr>
+        <th>ID</th>
+        <th>ID Inmueble</th>
+        <th>Usuario</th>
+        <th>Cedula Usuario</th>
+        <th>Acciones</th>
+      </tr>
+    {% for i in data %}
+      <tr>
+        <td>{{ i.id_Aprobacion }}</td>
+        <td>{{ i.id_Inmueble }}</td>
+        <td>{{ i.nombreUsuario }}</td>
+        <td>{{ i.cedula }}</td>
+        <td>
+          <a href="#" class="btn btn-outline-info">Editar</a>
+          <a href="javascript:confirmar_eliminar('{% url 'covenbiins:aprobaciones_eliminar' i.id_Aprobacion %}');" class="btn btn-outline-danger">Eliminar</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </table>
+
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item active" aria-current="page">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+
+  {% else %}
+    NO hay registros....
+  {% endif %}
+</div>
+{% endblock %}

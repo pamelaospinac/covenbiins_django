@@ -1,0 +1,32 @@
+{% extends 'covenbiins/base2.html' %}
+
+{% load static %}
+
+{% block titul %} Formulario Autenticaciones {% endblock %}
+
+{% block contenedor %}
+
+    {% if id %}
+        <h3>Editar: {{ id }}</h3>
+    {% endif %}
+
+    <form method="post" action="{% url 'covenbiins:autenticaciones_guardar' %}">
+        {% csrf_token %}
+
+        <input type="hidden" name="id" value="{{ data.id_Autenticacion }}">
+
+        <label class="form-label">Correo:</label>
+        <input type="text" name="correo" class="form-control" value="{{ data.email }}">
+        <br>
+        <label class="form-label">Contraseña:</label>
+        <input type="text" name="contrasena" class="form-control" value="{{ data.contrasena }}">
+        <button type="submit" class="btn btn-info mt-3">
+        {% if id %}
+            Actualizar
+        {% else %}
+            Crear
+        {% endif %}
+        </button>
+    </form>
+
+{% endblock %}
