@@ -12,28 +12,71 @@ from .models import *
 # Create your views here.
 
 
+def register(request):
+    result = Usuarios.objects.all()
+    context = {"usuarios": result}
+    return render(request, "covenbiins/register.html", context)
+
+
+def register_guardar(request):
+    if request.method == "POST":
+        cedula = request.POST.get("cedula")
+        nom = request.POST.get("nombre")
+        ape = request.POST.get("apellido")
+        fecha = request.POST.get("fechaNacimiento")
+        tel = request.POST.get("telefono")
+        direc = request.POST.get("direccion")
+        email = request.POST.get("email")
+        password = request.POST.get("contrasena")
+
+        try:
+            usu = Usuarios(
+                cedula=cedula,
+                nombre=nom,
+                apellido=ape,
+                fechaNacimiento=fecha,
+                telefono=tel,
+                direccion=direc,
+                email=email,
+                contrasena=password
+            )
+            usu.save()
+            messages.success(request, "Registrado")
+        except Exception as e:
+            messages.error(request, f"Error: {e}")
+        return HttpResponseRedirect(reverse("covenbiins:index", args=()))
+    else:
+        messages.warning(request, "No se enviaron datos")
+        return HttpResponseRedirect(reverse("covenbiins:register"))
+
 def login(request):
     if request.method == "POST":
         email = request.POST.get("email")
         contrasena = request.POST.get("contrasena")
         try:
-            q = Autenticaciones.objects.get(email=email, contrasena=contrasena)
+            u = Usuarios.objects.get(email=email, contrasena=contrasena)
             messages.success(request, "Bienvenido!!")
             datos = {
-                "id_Autenticacion": q.id_Atenticacion,
-                "email": q.email,
-                "contrasena": q.contrasena,
+                "email": u.email,
+                "contrasena": u.contrasena,
+                "rol": u.tipoUsuario
             }
             request.session["logueo"] = datos
-            return HttpResponseRedirect(reverse("covenbiins:index"))
+            return HttpResponse(request, "Okay")
         except Autenticaciones.DoesNotExist:
-            messages.error(request, "Usuarios o contraseñas no validos")
-            return render(request, "covenbiins:index")
+            messages.error(request, "Usuario o contraseña no validos")
+            return HttpResponse(request, "Malo")
     else:
-        if request.session.get("logueo", False):
-            return HttpResponseRedirect(reverse("covenbiins:index"))
-        else:
-            return render(request, "covenbiins:index")
+        pass
+
+
+def logout(request):
+    try:
+        del request.session["logueo"]
+        messages.success(request, "Sesion Cerrada")
+    except Exception as e:
+        messages.error(request, f"Error: {e}")
+    return HttpResponseRedirect(reverse("covenbiins:index"))
 
 
 def index(request):
@@ -60,7 +103,7 @@ def inmuebles_guardar(request):
         desc = request.POST.get("descripcion")
         direc = request.POST.get("direccion")
         tipo = request.POST.get("tipoInmueble")
-        usu = Usuarios.objects.get(pk=request.POST.get("usuario"))
+        cedula = Usuarios.objects.get(pk=request.POST.get("cedula"))
 
         if id_Inmueble == "":
             try:
@@ -70,7 +113,7 @@ def inmuebles_guardar(request):
                     descripcion=desc,
                     direccion=direc,
                     tipoInmueble=tipo,
-                    usuarios=usu,
+                    cedula=cedula,
                 )
                 inm.save()
                 messages.success(request, "Guardado correctamente")
@@ -84,6 +127,7 @@ def inmuebles_guardar(request):
                 q.descripcion = desc
                 q.direccion = direc
                 q.tipoInmueble = tipo
+                q.cedula = cedula
                 q.save()
                 messages.success(request, "Actualizado correctamente")
             except Exception as e:
@@ -130,6 +174,52 @@ def usuarios(request):
     result = Usuarios.objects.all()
     context = {"data": result}
     return render(request, "covenbiins/usuarios/listar_usu.html", context)
+
+
+def usuarios_crear_formulario(request):
+    query = Usuarios.objects.all()
+    context = {"data": query}
+    return render(request, "covenbiins/usuarios/form_usuario.html", context)
+
+
+def usuarios_guardar(request):
+    if request.method == "POST":
+        cedula = request.POST.get("cedula")
+        nom = request.POST.get("nombre")
+        rol = request.POST.get("tipoUsuario")
+
+        if cedula == "":
+            try:
+                usu = Usuarios(
+                    cedula=cedula,
+                    nombre=nom,
+                    tipoUsuario=rol,
+                )
+                usu.save()
+                messages.success(request, "Guardado correctamente")
+            except Exception as e:
+                messages.error(request, f"Error: {e}")
+        else:
+            try:
+                q = Usuarios.objects.get(pk=cedula)
+                q.cedula = cedula
+                q.nombre = nom
+                q.tipoUsuario = rol
+                q.save()
+                messages.success(request, "Actualizado correctamente")
+            except Exception as e:
+                messages.error(request, f"Error2: {e}")
+
+        return HttpResponseRedirect(reverse("covenbiins:listar_usuarios", args=()))
+    else:
+        messages.warning(request, "No se enviaron datos")
+        return HttpResponseRedirect(reverse("covenbiins:form_usuarios", args=()))
+
+
+def usuarios_editar(request, cedula):
+    q = Usuarios.objects.get(pk=cedula)
+    contexto = {"id": cedula, "data": q}
+    return render(request, "covenbiins/usuarios/form_usuario.html", contexto)
 
 
 def usuarios_buscar(request):
@@ -201,12 +291,13 @@ def citas_guardar(request):
         return HttpResponseRedirect(reverse("covenbiins:listar_citas", args=()))
     else:
         messages.warning(request, "No se enviaron datos")
-        return HttpResponseRedirect(reverse("covenbiins/citas/form_citas.html", contexto))
+        return HttpResponseRedirect(reverse("covenbiins:form_citas", args=()))
 
 
 def citas_editar(request, id_Citas):
     q = Citas.objects.get(pk=id_Citas)
     query = Usuarios.objects.all()
+    q.horaCita = q.horaCita.strftime('%Y-%m-%dT%H:%M')
     contexto = {"id": id_Citas, "data": q, "usuarios": query}
     return render(request, "covenbiins/citas/form_citas.html", contexto)
 
@@ -248,6 +339,45 @@ def rating_crear_formulario(request):
     return render(request, "covenbiins/ratings/form_rating.html", context)
 
 
+def rating_guardar(request):
+    if request.method == "POST":
+        id_Rating = request.POST.get("id")
+        cal = request.POST.get("calificacion")
+        cedula = Usuarios.objects.get(pk=request.POST.get("cedula"))
+
+        if id_Rating == "":
+            try:
+                rat = Ratings(
+                    calificacion=cal,
+                    cedula=cedula,
+                )
+                rat.save()
+                messages.success(request, "Guardado correctamente")
+            except Exception as e:
+                messages.error(request, f"Error: {e}")
+        else:
+            try:
+                q = Ratings.objects.get(pk=id_Rating)
+                q.calificacion = cal
+                q.cedula = cedula
+                q.save()
+                messages.success(request, "Actualizado correctamente")
+            except Exception as e:
+                messages.error(request, f"2Error: {e}")
+
+        return HttpResponseRedirect(reverse("covenbiins:listar_ratings", args=()))
+    else:
+        messages.warning(request, "No se enviaron datos")
+        return HttpResponseRedirect(reverse("covenbiins:form_rating", args=()))
+
+
+def rating_editar(request, id_Rating):
+    q = Ratings.objects.get(pk=id_Rating)
+    query = Usuarios.objects.all()
+    contexto = {"id": id_Rating, "data": q, "usuarios": query}
+    return render(request, "covenbiins/ratings/form_rating.html", contexto)
+
+
 def ratings_buscar(request):
     if request.method == "POST":
 
@@ -280,7 +410,58 @@ def aprobaciones(request):
 
 
 def aprobaciones_crear_formulario(request):
-    pass
+    query = Usuarios.objects.all()
+    Q = Aprobaciones.objects.all()
+    resultado = Inmuebles.objects.all()
+    context = {"usuarios": query, "aprobaciones": Q, "inmuebles": resultado}
+    return render(request, "covenbiins/aprobaciones/form_aprob.html", context)
+
+
+def aprobaciones_guardar(request):
+    if request.method == "POST":
+        id_Aprobacion = request.POST.get("id")
+        nomb = request.POST.get("nombre")
+        inm = Inmuebles.objects.get(pk=request.POST.get("inmueble"))
+        cedula = Usuarios.objects.get(pk=request.POST.get("cedula"))
+
+        if id_Aprobacion == "":
+            try:
+                apro = Aprobaciones(
+                    nombre=nomb,
+                    inmueble=inm,
+                    cedula=cedula,
+                )
+                apro.save()
+                messages.success(request, "Guardado correctamente")
+            except Exception as e:
+                messages.error(request, f"Error. {e}")
+        else:
+            try:
+                q = Aprobaciones.objects.get(pk=id)
+                q.nombre = nomb
+                q.inmueble = inm
+                q.cedula = cedula
+                q.save()
+                messages.success(request, "Actualizado correctamente")
+            except Exception as e:
+                messages.error(request, f"2Error. {e}")
+
+        return HttpResponseRedirect(reverse("covenbiins:listar_aprobaciones", args=()))
+    else:
+        messages.warning(request, "No se enviaron datos")
+        return HttpResponseRedirect(reverse("covenbiins:form_aprob", args=()))
+
+
+def aprobaciones_editar(request, id_Aprobacion):
+    q = Aprobaciones.objects.get(pk=id_Aprobacion)
+    result = Aprobaciones.objects.all()
+    resultado = Inmuebles.objects.all()
+    query = Usuarios.objects.all()
+    contexto = {"id": id_Aprobacion, "data": q, "usuarios": query, "aprobaciones": result, "inmuebles": resultado}
+    return render(request, "covenbiins/aprobaciones/form_aprob.html", contexto)
+
+
+0
 
 
 def aprobaciones_buscar(request):
@@ -306,75 +487,3 @@ def aprobaciones_eliminar(request, id_Aprobacion):
         messages.error(request, f"Error: {e}")
 
     return HttpResponseRedirect(reverse("covenbiins:listar_aprobaciones", args=()))
-
-
-def autenticaciones(request):
-    result = Autenticaciones.objects.all()
-    context = {"data": result}
-    return render(request, "covenbiins/autenticaciones/listar_autenticaciones.html", context)
-
-
-def autenticaciones_crear_formulario(request):
-    return render(request, "covenbiins/autenticaciones/form_autent.html")
-
-
-def autenticaciones_guardar(request):
-    if request.method == "POST":
-        id_Autenticacion = request.POST.get("id")
-        em = request.POST.get("correo")
-        con = request.POST.get("contrasena")
-
-        if id_Autenticacion == "":
-            try:
-                aut = Autenticaciones(
-                    email=em,
-                    contrasena=con,
-                )
-                aut.save()
-                messages.success(request, "Guardado correctamente")
-            except Exception as e:
-                messages.error(request, f"Error. {e}")
-        else:
-            try:
-                q = Autenticaciones.objects.get(pk=id_Autenticacion)
-                q.email = em
-                q.save()
-                messages.success(request, "Actualizado correctamente")
-            except Exception as e:
-                messages.error(request, f"Error2. {e}")
-
-        return HttpResponseRedirect(reverse("covenbiins:listar_autenticaciones", args=()))
-    else:
-        messages.warning(request, "NO se enviaron datos")
-        return render(request, "covenbiins:form_autent", args=())
-
-
-def autenticaciones_editar_formulario(request, id_Autenticacion):
-    q = Autenticaciones.objects.get(pk=id_Autenticacion)
-    contexto = {"id": id_Autenticacion, "data": q}
-    return render(request, "covenbiins/autenticaciones/form_autent.html", contexto)
-
-
-def autenticaciones_buscar(request):
-    if request.method == "POST":
-
-        buscar = request.POST.get("buscar")
-
-        query = Autenticaciones.objects.filter(email__icontains=buscar)
-
-        context = {"data": query, "buscado": buscar}
-        return render(request, "covenbiins/autenticaciones/listar_autenticaciones.html", context)
-    else:
-        messages.warning(request, "No se enviaron datos")
-    return HttpResponseRedirect(reverse("covenbiins:autenticaciones", args=()))
-
-
-def autenticaciones_eliminar(request, id_Autenticacion):
-    try:
-        q = Autenticaciones.objects.get(pk=id_Autenticacion)
-        q.delete()
-        messages.success(request, "Registro eliminado correctamente")
-    except Exception as e:
-        messages.error(request, f"Error: {e}")
-
-    return HttpResponseRedirect(reverse("covenbiins:listar_autenticaciones", args=()))

@@ -1,0 +1,22 @@
+{% extends "covenbiins/base.html" %}
+
+{% load static %}
+
+{% block titul %} Iniciar Sesion {% endblock %}
+
+{% block contenedor %}
+    <div class="container pt-5 border col-md-12">
+        <form class="" action="{% url 'covenbiins:login' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electronico:</label>
+                <input type="email" class="form-control" id="email" aria-describedby="UserNameHelp" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="contrasena" class="form-label">Password</label>
+                <input type="password" class="form-control" id="contrasena" name="contrasena">
+            </div>
+            <button type="submit" class="btn btn-outline-success mb-3">Submit</button>
+        </form>
+    </div>
+{% endblock %}

@@ -17,17 +17,13 @@ class AprobacionesAdmin(admin.ModelAdmin):
 
 class UsuariosAdmin(admin.ModelAdmin):
     fields = ["cedula", "nombre", "apellido", "fechaNacimiento", "telefono", "direccion", "tipoUsuario",
-              "id_Autenticacion", "foto"]
-    list_display = ["cedula", "nombre", "apellido", "tipoUsuario"]
+              "email", "contrasena", "foto"]
+    list_display = ["cedula", "nombre", "apellido", "tipoUsuario", "email", "contrasena"]
 
 
 class RatingsAdmin(admin.ModelAdmin):
     fields = ["calificacion", "cedula"]
     list_display = ["cedula", "calificacion"]
-
-
-class AutenticacionesAdmin(admin.ModelAdmin):
-    fields = ["email", "contrasena"]
 
 
 class CitasAdmin(admin.ModelAdmin):
@@ -39,5 +35,4 @@ admin.site.register(Inmuebles, InmueblesAdmin)
 admin.site.register(Aprobaciones, AprobacionesAdmin)
 admin.site.register(Usuarios, UsuariosAdmin)
 admin.site.register(Ratings, RatingsAdmin)
-admin.site.register(Autenticaciones, AutenticacionesAdmin)
 admin.site.register(Citas, CitasAdmin)

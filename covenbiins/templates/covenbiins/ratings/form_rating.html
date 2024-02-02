@@ -10,7 +10,7 @@
         <h3>Editar: {{ id }}</h3>
     {% endif %}
 
-    <form method="post" action="">
+    <form method="post" action="{% url 'covenbiins:rating_guardar' %}">
         {% csrf_token %}
 
         <input type="hidden" name="id" value="{{ data.id_Rating }}">
@@ -19,10 +19,10 @@
             <input type="number" name="calificacion" class="form-control" value="{{ data.calificacion }}">
         </div>
         <br>
-         <select name="usuario" class="form-select">
+         <select name="cedula" class="form-select">
             <option selected>Usuario</option>
             {% for i in usuarios %}
-                <option value="{{ i.cedula }}"{% if data.Usuarios.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
+                <option value="{{ i.cedula }}"{% if data.cedula == i %}selected=""{% endif %}>{{ i.cedula }}</option>
             {% endfor %}
         </select>
         <br>

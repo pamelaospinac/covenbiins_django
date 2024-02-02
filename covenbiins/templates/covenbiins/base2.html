@@ -18,115 +18,45 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-md navbar-light">
-            <div class="container-fluid">
-                <a href="{% url 'covenbiins:index' %}" class="navbar-brand"><img src="{% static 'covenbiins/img/logoPrincipal.png' %}" alt="logoPrincipal" width="170px" height="40px"></a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="MenuNavegacion">
-                    <form class="container-fluid d-flex justify-content-end">
-                        <div id="MenuNavegacion" class="nav navbar-nav">
-                            <ul class="navbar-nav me-auto navbar">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'covenbiins:listar_inmuebles' %}">Inmuebles</a>
-                                </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'covenbiins:listar_usuarios' %}">Usuarios</a>
-                                </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'covenbiins:listar_ratings' %}">Ratings</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'covenbiins:listar_citas' %}">Citas</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'covenbiins:listar_aprobaciones' %}">Aprobaciones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'covenbiins:listar_autenticaciones' %}">Autenticaciones</a>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Ingresar</button>
-                                </li>
-                                <li class="nav-item">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#myModal2">Registrarse</button>
-                                </li>
-                            </ul>
-                            <form class="d-flex">
-                                <button id = "boton_principal" type="button">PUBLICA TU INMUEBLE</button>
-                            </form>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </nav>
-        <div class="modal" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Iniciar sesión</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body">
-                        <form action="/action_page.php">
-                            <div class="input-group">
-                                <span class="input-group-text">Correo Electronico:</span>
-                                <input type="email" class="form-control" id="email">
-                            </div><br>
-                            <div class="input-group">
-                                <span class="input-group-text">Contraseña:</span>
-                                <input type="password" class="form-control" id="password">
-                            </div><br>
-                            <div class="checkbox">
-                                <label><input type="checkbox"> Recordarme</label>
-                            </div>
+        <div class="container-fluid">
+            <a href="{% url 'covenbiins:index' %}" class="navbar-brand"><img
+                    src="{% static 'covenbiins/img/logoPrincipal.png' %}" alt="logoPrincipal" width="170px"
+                    height="40px"></a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="MenuNavegacion">
+                <form class="container-fluid d-flex justify-content-end">
+                    <div id="MenuNavegacion" class="nav navbar-nav">
+                        <ul class="navbar-nav me-auto navbar">
+                            <li class="nav-item">
+                                <a class="nav-link invisible" href="{% url 'covenbiins:listar_ratings' %}">Ratings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'covenbiins:listar_inmuebles' %}">Inmuebles</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'covenbiins:listar_usuarios' %}">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'covenbiins:listar_citas' %}">Citas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'covenbiins:listar_aprobaciones' %}">Aprobaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'covenbiins:logout' %}">Cerrar Sesion</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex">
+                            <button id="boton_principal" type="button">PUBLICA TU INMUEBLE</button>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" value="iniciar sesión" onclick="validarUsuario()">Ingresar</button>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
-
-        <div class="modal" id="myModal2">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Registrarse</h4>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="/action_page.php">
-                            <div class="input-group">
-                                <span class="input-group-text">Correo electronico:</span>
-                                <input type="email" class="form-control" id="emailRegister">
-                            </div><br>
-                            <div class="input-group">
-                                <span class="input-group-text">Contraseña:</span>
-                                <input type="password" class="form-control" id="passwordRegister">
-                            </div><br>
-                            <div class="input-group">
-                                <span class="input-group-text">Confirme contraseña:</span>
-                                <input type="password" class="form-control" id="Conf_password">
-                            </div><br>
-                            <div class="checkbox">
-                                <label><input type="checkbox"> Soy mayor de edad</label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox"> Acepto términos y Condiciones
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" value="registrarse">Registrarme</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </nav>
      {% if messages %}
         {% for message in messages %}
         <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible" role="alert">

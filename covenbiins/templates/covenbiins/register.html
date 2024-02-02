@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "covenbiins/base.html" %}
 
-</body>
-</html>
+{% load static %}
+
+{% block titul %} Registro {% endblock %}
+
+{% block contenedor %}
+    <div class="container">
+        <div>
+            <h2 class="text-center">Registro</h2>
+            <form method="post" action="{% url 'covenbiins:register_guardar' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="cedula" class="form-label">Cedula</label>
+                  <input type="number" class="form-control" id="cedula" placeholder="Digite su cedula" name="cedula">
+                </div>
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Digite su nombre" name="nombre">
+                </div>
+                <div class="mb-3">
+                  <label for="apellido" class="form-label">Apellido</label>
+                  <input type="text" class="form-control" id="apellido" placeholder="Digite su apellido" name="apellido">
+                </div>
+                <div class="mb-3">
+                  <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento</label>
+                  <input type="date" class="form-control" id="fecha_nacimiento" name="fechaNacimiento">
+                </div>
+                <div class="mb-3">
+                  <label for="telefono" class="form-label">Telefono</label>
+                  <input type="number" class="form-control" id="telefono" placeholder="Digite su telefono" name="telefono">
+                </div>
+                <div class="mb-3">
+                  <label for="direccion" class="form-label">Direccion</label>
+                  <input type="text" class="form-control" id="direccion" placeholder="Digite su direccion" name="direccion">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="Digite su email" name="email">
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="password" placeholder="Digite su contraseña" name="contrasena">
+                </div>
+
+                <button type="submit" class="btn btn-dark d-grid gap-2 mx-auto">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

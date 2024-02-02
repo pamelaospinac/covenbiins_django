@@ -22,14 +22,14 @@
         <select name="usuario" class="form-select">
             <option selected>Usuario</option>
             {% for i in usuarios %}
-                <option value="{{ i.cedula }}"{% if data.Usuarios.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
+                <option value="{{ i.cedula }}"{% if data.usuario.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
             {% endfor %}
         </select>
         <br>
         <select name="asesor" class="form-select">
             <option selected>Asesor</option>
             {% for i in usuarios %}
-                <option value="{{ i.cedula }}"{% if data.Usuarios.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
+                <option value="{{ i.cedula }}"{% if data.asesor.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
             {% endfor %}
         </select>
         <br>

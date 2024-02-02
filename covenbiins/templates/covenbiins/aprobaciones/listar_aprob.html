@@ -7,7 +7,7 @@
 {% block contenedor %}
   <br>
   <div class="container-fluid">
-    <a class="btn btn-success" href="#">Crear</a>
+    <a class="btn btn-success" href="{% url 'covenbiins:form_aprob' %}">Crear</a>
 
     <form class="d-flex mt-2 mb-4" role="search" method="post" action="{% url 'covenbiins:aprobaciones_buscar' %}">
       {% csrf_token %}
@@ -32,7 +32,7 @@
         <td>{{ i.nombreUsuario }}</td>
         <td>{{ i.cedula }}</td>
         <td>
-          <a href="#" class="btn btn-outline-info">Editar</a>
+          <a href="{% url 'covenbiins:aprobaciones_editar' i.id_Aprobacion %}" class="btn btn-outline-info">Editar</a>
           <a href="javascript:confirmar_eliminar('{% url 'covenbiins:aprobaciones_eliminar' i.id_Aprobacion %}');" class="btn btn-outline-danger">Eliminar</a>
         </td>
       </tr>

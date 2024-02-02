@@ -30,7 +30,7 @@
         <td>{{ i.calificacion }}</td>
         <td>{{ i.cedula }}</td>
         <td>
-          <a href="#" class="btn btn-outline-info">Editar</a>
+          <a href="{% url 'covenbiins:rating_editar' i.id_Rating %}" class="btn btn-outline-info">Editar</a>
           <a href="javascript:confirmar_eliminar('{% url 'covenbiins:ratings_eliminar' i.id_Rating %}');" class="btn btn-outline-danger">Eliminar</a>
         </td>
       </tr>

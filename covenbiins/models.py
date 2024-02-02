@@ -13,6 +13,9 @@ class Inmuebles(models.Model):
     imagen = models.CharField(max_length=50, null=True)
     cedula = models.ForeignKey('Usuarios', on_delete=models.DO_NOTHING)
 
+    def __str__(self):
+        return f"{self.id_Inmueble}"
+
 
 class Aprobaciones(models.Model):
     id_Aprobacion = models.BigAutoField(unique=True, primary_key=True)
@@ -25,6 +28,12 @@ class Aprobaciones(models.Model):
 
 
 class Usuarios(models.Model):
+    Roles = (
+        (1, 'Administrador'),
+        (2, 'Asesor Legal'),
+        (3, 'Vendedor'),
+        (4, "Comprador"),
+    )
     cedula = models.CharField(unique=True, primary_key=True, max_length=10)
     foto = models.ImageField(null=True, blank=True, default='fotos/default.png', upload_to='fotos')
     nombre = models.CharField(max_length=50)
@@ -32,26 +41,18 @@ class Usuarios(models.Model):
     fechaNacimiento = models.DateField()
     telefono = models.CharField(max_length=50)
     direccion = models.CharField(max_length=50)
-    Roles = (
-        (1, 'Administrador'),
-        (2, 'Asesor Legal'),
-        (3, 'Vendedor'),
-        (4, "Comprador"),
-    )
     tipoUsuario = models.IntegerField(choices=Roles, default=4)
-    id_Autenticacion = models.ForeignKey('Autenticaciones', on_delete=models.DO_NOTHING)
+    email = models.EmailField(unique=True, null=True)
+    contrasena = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return f"{self.cedula}"
 
 
 class Ratings(models.Model):
     id_Rating = models.BigAutoField(unique=True, primary_key=True)
     calificacion = models.IntegerField()
     cedula = models.ForeignKey('Usuarios', on_delete=models.DO_NOTHING)
-
-
-class Autenticaciones(models.Model):
-    id_Autenticacion = models.BigAutoField(unique=True, primary_key=True)
-    email = models.EmailField(unique=True)
-    contrasena = models.CharField(max_length=50)
 
 
 class Citas(models.Model):

@@ -5,316 +5,121 @@
 {% block titul %} Inicio {% endblock %}
 
 {% block contenedor %}
-    <main>
-            <section class="p-3">
-                <div class="position-relative overflow-hidden p-1 p-md-1 m-md-3 text-center" id="banner">
-                    <div id="img"></div>
-                    <div class="container">
-                        <div class="col-md-5 p-lg-5 mx-auto my-5">
-                            <h1 class="display-10 fw-normal">BUSCA TU INMUEBLE IDEAL</h1>
-                            <p class="display-20 fw-normal" id="p">Encuentra aquí el inmueble que necesitas</p>
-                            <div id="drop">
-                                <div class="dropdown">
-                                    <button class="btn btn-light dropdown-toggle m-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      CATEGORÍA
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      <li><a class="dropdown-item" href="#">Nuevo</a></li>
-                                      <li><a class="dropdown-item" href="#">Usado</a></li>
-                                    </ul>
+    {% if request.session.logueo %}
+        <main class="vendedor">
+            <aside class="a_vendedor">
+                <div class="text-center">
+                    <div>
+                        <i class="bi bi-plus-square-fill"></i>
+                        <p>Publicar Inmueble</p>
+                    </div>
+                    <div>
+                        <i class="bi bi-person-fill"></i>
+                        <p>Perfil</p>
+                    </div>
+                    <div>
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>Mensajes</p>
+                    </div>
+                    <div>
+                        <i class="bi bi-book-half"></i>
+                        <p>Catalogo</p>
+                    </div>
+                    <div>
+                        <i class="bi bi-bookmark-fill"></i>
+                        <p>Lista de Deseados</p>
+                    </div>
+                    <div>
+                        <i class="bi bi-list-check"></i>
+                        <p>Historial de Ventas</p>
+                    </div>
+                    <div>
+                        <i class="bi bi-briefcase-fill"></i>
+                        <p>Asesoria Legal</p>
+                    </div>
+                </div>
+            </aside>
+            <div class="estructura_vendedor">
+                <section>
+                    <h3 class="mb-5">Inmuebles sugeridos según tus busquedas</h3>
+                    <div class="d-flex justify-content-evenly" >
+                        <div class="card" style="width: 18rem; height: 23rem;">
+                            <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="card-text overflow-hidden">
+                                    <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                    <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                    <strong><p>$ 550.000.000</p></strong>
+                                    <div class="separacion-informacion">
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Area</p></strong>
+                                            <strong><p>39 m2</p></strong>
+                                        </div>
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Hab</p></strong>
+                                            <strong><p>4</p></strong>
+                                        </div>
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Baños</p></strong>
+                                            <strong><p>2</p></strong>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-light dropdown-toggle m-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      TIPO INMUEBLE
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      <li><a class="dropdown-item" href="#">Apartamento</a></li>
-                                      <li><a class="dropdown-item" href="#">Casa</a></li>
-                                      <li><a class="dropdown-item" href="#">Lote</a></li>
-                                    </ul>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem; height: 23rem;">
+                            <img src="{% static 'covenbiins/img/apartamento4.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p class="titulo text-truncate">Apartamento - Envigado</p>
+                                    <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                    <strong><p>$ 450.000.000</p></strong>
+                                    <div class="separacion-informacion">
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Area</p></strong>
+                                            <strong><p>25 m2</p></strong>
+                                        </div>
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Hab</p></strong>
+                                            <strong><p>2</p></strong>
+                                        </div>
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Baños</p></strong>
+                                            <strong><p>1</p></strong>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="dropdown">
-                                    <button class="btn btn-light dropdown-toggle m-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                      UBICACIÓN
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                      <li><a class="dropdown-item" href="#">Itagüí</a></li>
-                                      <li><a class="dropdown-item" href="#">Envigado</a></li>
-                                      <li><a class="dropdown-item" href="#">Sabaneta</a></li>
-                                    </ul>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem; height: 23rem;">
+                            <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="card-text">
+                                    <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                    <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                    <strong><p>$ 750.000.000</p></strong>
+                                    <div class="separacion-informacion">
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Area</p></strong>
+                                            <strong><p>70 m2</p></strong>
+                                        </div>
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Hab</p></strong>
+                                            <strong><p>5</p></strong>
+                                        </div>
+                                        <div class="card-text" style="width: 5rem; height: 4rem;">
+                                            <strong><p>Baños</p></strong>
+                                            <strong><p>4</p></strong>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a class="btn btn-primary m-3" href="#">Buscar</a>
                             </div>
                         </div>
                     </div>
-                        <div class="product-device shadow-sm d-none d-md-block"></div>
-                        <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
-                    </div>
-                </div>
-            </section>
-            <h3 class="p-2">Inmuebles sugeridos al publico</h3>
-            <section class="p-3">
-                <div id="carouselExampleControls" class="carousel slide">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <div class="separacion-cards">
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 550.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>39 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Envigado</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 450.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>25 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>1</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento2.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 750.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>70 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>5</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <div class="separacion-cards">
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento3.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 550.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>39 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento4.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Envigado</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 450.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>25 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>1</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento5.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 750.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>70 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>5</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                      </div>
-                    <div class="carousel-item">
-                        <div class="separacion-cards">
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento8.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 550.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>39 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento9.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Envigado</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 450.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>25 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>1</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 750.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>70 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>5</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon btn btn-primary" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                      <span class="carousel-control-next-icon btn btn-primary" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </section>
-            <section class="p-3 mb-4" id="cp">
-                <h3 class="p-2">Servicios de COVENBIINS</h3>
-                <div class="position-relative overflow-hidden p-1 p-md-1 m-md-3 text-center">
-                    <div class="separacion-cards">
+                </section>
+                <section>
+                    <h3>Servicios Covenbiins para ti</h3>
+                    <div class="d-flex justify-content-evenly">
                         <div class="card" style="width: 18rem;" id="cc">
                             <div class="card-body">
                                 <div>
@@ -326,341 +131,668 @@
                                 <h5 class="card-title">¿Quieres vender un inmueble?</h5>
                                 <p class="card-text">Covenbiins te guia en el proceso de vender tu inmueble</p>
                             </div>
-                        </div>
-                        <div class="card" style="width: 18rem;" id="cc">
-                            <div class="card-body">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
-                                </svg>
-                                <h5 class="card-title">Asesoria legal</h5>
-                                <p class="card-text">Un asesor legal te ayudara en el proceso de compra o venta de una propiedad</p>
+                            <div class="card" style="width: 18rem;" id="cc">
+                                <div class="card-body">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                                    </svg>
+                                    <h5 class="card-title">Asesoria legal</h5>
+                                    <p class="card-text">Un asesor legal te ayudara en el proceso de compra o venta de una propiedad</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="card" style="width: 18rem;" id="cc">
-                            <div class="card-body">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
-                                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-                                </svg>
-                                <h5 class="card-title">Califica un usuario</h5>
-                                <p class="card-text">Califica o escribe una reseña sobre un usuario y conoce las calificaciones previas</p>
+                    </div>    
+                </section>
+            </div>
+        </main>
+    {% else %}
+        <main>
+                <section class="p-3">
+                    <div class="position-relative overflow-hidden p-1 p-md-1 m-md-3 text-center" id="banner">
+                        <div id="img"></div>
+                        <div class="container">
+                            <div class="col-md-5 p-lg-5 mx-auto my-5">
+                                <h1 class="display-10 fw-normal">BUSCA TU INMUEBLE IDEAL</h1>
+                                <p class="display-20 fw-normal" id="p">Encuentra aquí el inmueble que necesitas</p>
+                                <div id="drop">
+                                    <select class="form-select my-3 mx-3 w-auto" aria-label="Default select example">
+                                    <option selected>CATEGORIA</option>
+                                    <option value="1">Usado</option>
+                                    <option value="2">Nuevo</option>
+                                    </select>
+                                    <select class="form-select my-3 mx-3 w-auto" aria-label="Default select example">
+                                    <option selected>TIPO INMUEBLE</option>
+                                    <option value="1">Casa</option>
+                                    <option value="2">Apartamento</option>
+                                    <option value="3">Lote</option>
+                                    </select>
+                                    <select class="form-select my-3 mx-3 w-auto" aria-label="Default select example">
+                                    <option selected>UBICACION INTERES</option>
+                                    <option value="1">Itagüí</option>
+                                    <option value="2">Medellin</option>
+                                    <option value="3">Poblado</option>
+                                    <option value="4">La Estrella</option>
+                                    <option value="5">Envigado</option>
+                                    </select>
+                                    <a class="btn btn-primary m-3" href="#">Buscar</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="card" style="width: 18rem;" id="cc">
-                            <div class="card-body">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
-                                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
-                                </svg>
-                                <h5 class="card-title">¿Te interesa una propiedad?</h5>
-                                <p class="card-text">Comunicate con el comprador a través de nuestro servicios de chat o permite que te contacten</p>
-                            </div>
+                            <div class="product-device shadow-sm d-none d-md-block"></div>
+                            <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
                         </div>
                     </div>
-                </div>
-            </section class="mt-3">
-            <h3 class="p-2">Catálogo de inmuebles en venta</h3>
-            <section class="p-3">
-                <div id="carouselExampleControlsdos" class="carousel slide">
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
+                </section>
+                <h3 class="p-2">Inmuebles sugeridos al publico</h3>
+                <section class="p-3">
+                    <div id="carouselExampleControls" class="carousel slide">
+                        <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="separacion-cards">
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text overflow-hidden">
+                                                <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 550.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>39 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Envigado</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 450.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>25 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>1</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento2.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 750.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>70 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>5</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="separacion-cards">
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento3.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 550.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>39 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento4.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Envigado</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 450.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>25 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>1</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento5.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 750.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>70 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>5</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="separacion-cards">
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento8.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 550.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>39 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento9.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text text-truncate">
+                                                <p class="titulo">Apartamento - Envigado</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 450.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>25 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>1</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo text-truncate">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 750.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>70 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>5</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" style="margin-left: -30px;">
+                        <span class="carousel-control-prev-icon btn btn-primary" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" style="margin-right: -30px;">
+                        <span class="carousel-control-next-icon btn btn-primary" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </section>
+                <section class="p-3 mb-4" id="cp">
+                    <h3 class="p-2">Servicios de COVENBIINS</h3>
+                    <div class="position-relative overflow-hidden p-1 p-md-1 m-md-3 text-center">
                         <div class="separacion-cards">
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 550.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>39 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="card" style="width: 18rem;" id="cc">
+                                <div class="card-body">
+                                    <div>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+                                            <path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                                            <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+                                        </svg>
                                     </div>
+                                    <h5 class="card-title">¿Quieres vender un inmueble?</h5>
+                                    <p class="card-text">Covenbiins te guia en el proceso de vender tu inmueble</p>
                                 </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Envigado</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 450.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>25 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>1</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento2.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 750.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>70 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>5</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <div class="separacion-cards">
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento3.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 550.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>39 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento4.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Envigado</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 450.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>25 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>1</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento5.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 750.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>70 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>5</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                      </div>
-                      <div class="carousel-item">
-                        <div class="separacion-cards">
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento8.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 550.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>39 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/apartamento9.jpg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Envigado</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 450.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>25 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>1</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                            <a href="#" style="color: #000; text-decoration: none;">
-                                <div class="card" style="width: 18rem; height: 23rem;">
-                                    <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <div class="card-text">
-                                            <p class="titulo">Apartamento en venta - Medellin</p>
-                                            <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
-                                            <strong><p>$ 750.000.000</p></strong>
-                                            <div class="separacion-informacion">
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Area</p></strong>
-                                                    <strong><p>70 m2</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Hab</p></strong>
-                                                    <strong><p>5</p></strong>
-                                                </div>
-                                                <div class="card-text" style="width: 5rem; height: 4rem;">
-                                                    <strong><p>Baños</p></strong>
-                                                    <strong><p>4</p></strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsdos" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon btn btn-primary" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsdos" data-bs-slide="next">
-                      <span class="carousel-control-next-icon btn btn-primary" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </section>
-            <section class="p-3 mb-4" id="cp">
-                <h3 class="p-2">Testimonios</h3>
-                <div class="separacion-cards">
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">Laura Estrada</h5>
-                          <p class="card-text">“Quiero agradecer a covenbiins pues a traves de su portal pude adquirir una casa tal y como la soñaba”</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">Julian Narvaez</h5>
-                          <p class="card-text">“Con la informacion que nos brinda COVENBIINS encontramos un apartamento hermoso”</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                          <h5 class="card-title">Sofia Alzate</h5>
-                          <p class="card-text">“A traves de covenbiins pude vender mi apartamente sin complicaciones y siempre contando con la ayuda de sus asesores”</p>
-                        </div>
-                    </div>
-                </div>
-            </section class="mb-4">
-            <h3 class="p-2">Articulos de interes</h3>
-            <section class="p-3">
-                <div class="separacion-cards">
-                    <div class="card" style="width: 35rem;">
-                        <img src="{% static 'covenbiins/img/articulo.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="titulo">
-                                <h5 class="card-title">Terminos del mercado inmobiliario</h5>
                             </div>
-                            <p class="card-text">Pensando en resolver tus inquietudes frecuentes acerca del mercado inmobiliario, decidimos presentarte las 10 expresiones que despiertan más inquietudes en Colombia y además, te explicamos en qué consisten.</p>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 35rem;">
-                        <img src="{% static 'covenbiins/img/articulo2.jpg' %}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="titulo">
-                                <h5 class="card-title">¿Cómo hacer un plano de una casa?</h5>
+                            <div class="card" style="width: 18rem;" id="cc">
+                                <div class="card-body">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                                    </svg>
+                                    <h5 class="card-title">Asesoria legal</h5>
+                                    <p class="card-text">Un asesor legal te ayudara en el proceso de compra o venta de una propiedad</p>
+                                </div>
                             </div>
-                            <p class="card-text">Hemos recopilado cinco de las mejores aplicaciones para diseñar casas, de una forma tan intuitiva, como si estuvieras al lado de un profesional.</p>
+                            <div class="card" style="width: 18rem;" id="cc">
+                                <div class="card-body">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                    </svg>
+                                    <h5 class="card-title">Califica un usuario</h5>
+                                    <p class="card-text">Califica o escribe una reseña sobre un usuario y conoce las calificaciones previas</p>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 18rem;" id="cc">
+                                <div class="card-body">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-chat-left-text-fill" viewBox="0 0 16 16">
+                                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm3.5 1a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 2.5a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5z"/>
+                                    </svg>
+                                    <h5 class="card-title">¿Te interesa una propiedad?</h5>
+                                    <p class="card-text">Comunicate con el comprador a través de nuestro servicios de chat o permite que te contacten</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
-    </main>
+                </section class="mt-3">
+                <h3 class="p-2">Catálogo de inmuebles en venta</h3>
+                <section class="p-3">
+                    <div id="carouselExampleControlsdos" class="carousel slide">
+                        <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="separacion-cards">
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 550.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>39 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Envigado</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 450.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>25 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>1</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento2.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 750.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>70 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>5</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="separacion-cards">
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento3.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 550.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>39 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento4.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Envigado</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 450.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>25 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>1</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento5.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 750.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>70 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>5</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="separacion-cards">
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento8.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 550.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>39 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/apartamento9.jpg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Envigado</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 450.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>25 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>1</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" style="color: #000; text-decoration: none;">
+                                    <div class="card" style="width: 18rem; height: 23rem;">
+                                        <img src="{% static 'covenbiins/img/casa1.jpeg' %}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="card-text">
+                                                <p class="titulo">Apartamento - Medellin</p>
+                                                <Strong><p class="espacio-filtros">Precio de venta</p></Strong>
+                                                <strong><p>$ 750.000.000</p></strong>
+                                                <div class="separacion-informacion">
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Area</p></strong>
+                                                        <strong><p>70 m2</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Hab</p></strong>
+                                                        <strong><p>5</p></strong>
+                                                    </div>
+                                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                                        <strong><p>Baños</p></strong>
+                                                        <strong><p>4</p></strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsdos" data-bs-slide="prev" style="margin-left: -30px;">
+                        <span class="carousel-control-prev-icon btn btn-primary" aria-hidden="true"></span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsdos" data-bs-slide="next" style="margin-right: -30px;">
+                        <span class="carousel-control-next-icon btn btn-primary" aria-hidden="true"></span>
+                        </button>
+                    </div>
+                </section>
+                <section class="p-3 mb-4" id="cp">
+                    <h3 class="p-2">Testimonios</h3>
+                    <div class="separacion-cards">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                            <h5 class="card-title">Laura Estrada</h5>
+                            <p class="card-text">“Quiero agradecer a covenbiins pues a traves de su portal pude adquirir una casa tal y como la soñaba”</p>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                            <h5 class="card-title">Julian Narvaez</h5>
+                            <p class="card-text">“Con la informacion que nos brinda COVENBIINS encontramos un apartamento hermoso”</p>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                            <h5 class="card-title">Sofia Alzate</h5>
+                            <p class="card-text">“A traves de covenbiins pude vender mi apartamente sin complicaciones y siempre contando con la ayuda de sus asesores”</p>
+                            </div>
+                        </div>
+                    </div>
+                </section class="mb-4">
+                <h3 class="p-2">Articulos de interes</h3>
+                <section class="p-3">
+                    <div class="separacion-cards">
+                        <div class="card" style="width: 35rem;">
+                            <img src="{% static 'covenbiins/img/articulo.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="titulo">
+                                    <h5 class="card-title">Terminos del mercado inmobiliario</h5>
+                                </div>
+                                <p class="card-text">Pensando en resolver tus inquietudes frecuentes acerca del mercado inmobiliario, decidimos presentarte las 10 expresiones que despiertan más inquietudes en Colombia y además, te explicamos en qué consisten.</p>
+                            </div>
+                        </div>
+                        <div class="card" style="width: 35rem;">
+                            <img src="{% static 'covenbiins/img/articulo2.jpg' %}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <div class="titulo">
+                                    <h5 class="card-title">¿Cómo hacer un plano de una casa?</h5>
+                                </div>
+                                <p class="card-text">Hemos recopilado cinco de las mejores aplicaciones para diseñar casas, de una forma tan intuitiva, como si estuvieras al lado de un profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </main>
+    {% endif %}
 {% endblock %}
