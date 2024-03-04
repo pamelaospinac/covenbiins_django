@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'covenbiins/base.html' %}
 
-</body>
-</html>
+{% load static %}
+
+{% block titul %} Detalle {% endblock %}
+
+{% block contenedor %}
+    <main class="detalle">
+        <aside class="aside_detalle">
+            <p>¡Estoy Interesado!</p>
+            <div>
+                <p>Contacta al vendedor</p>
+                <button class="btn btn-primary">IR AL CHAT</button>
+                <div class="d-inline-flex mt-3">
+                    <div class="d-inline-flex">
+                        <img src="{{data.cedula.foto.url}}" alt="...." id="foto_perfil_detalle">
+                        <p class="mt-3 ms-3">{{ data.cedula.nombre }} {{ data.cedula.apellido }}</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div class="estructura_detalle mt-1">
+            <section class="text-center">
+                <h3>{{ data.nombre }}</h3>
+                <p>{{ data.direccion }} - Area: {{ data.area }}m2</p>
+            </section>
+            <section class="container">    
+                <img src="{{data.imagen.url}}" alt="imagen casa" class="rounded mx-auto d-block" id="img_inmueble">
+                <div class="ms-2 mt-3">
+                    <form action="{% url 'covenbiins:lista_agregar' %}" method="post" class="mb-3">
+                        {% csrf_token %}              
+                        <input type="hidden" name="id" value="{{ data.id_Inmueble }}">
+                        <button type="submit" class="btn"><i class="bi bi-bookmark"></i> Añadir a lista de deseos</button>
+                    </form> 
+                    <div class="container d-inline-flex p-3" style="background-color: #ebebeb;">
+                        <div>
+                            <p>$ {{data.precio}}</p>
+                            <p>Precio de venta</p>
+                        </div>
+                        <div class="container d-inline-flex ms-5 align-items-center">
+                            <div class="col">
+                                <h4 class="ms-3">{{ data.habitaciones }} <img src="{% static 'covenbiins/img/cama.png' %}" alt=""></h4>
+                                <p>Habitaciones</p>
+                            </div>
+                            <div class="col">
+                                <h4>{{ data.banos }} <img src="{% static 'covenbiins/img/cuarto-de-bano.png' %}" alt=""></h4>
+                                <p class="ms-1">Baños</p>
+                            </div>
+                            <div class="col">
+                                <h4 class="ms-3">{{ data.estrato }}</h4>
+                                <p>Estrato</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <p>{{data.descripcion}}</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

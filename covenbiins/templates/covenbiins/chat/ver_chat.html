@@ -1,0 +1,24 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Inmuebles {% endblock %}
+
+{% block contenedor %}
+<h1>Chat con {{ otro.nombre }}</h1>
+{% for c in chat %}
+    {% if c.usuario_origen.cedula == request.session.logueo.cedula %}
+        <div style="background-color: aquamarine;"><strong>{{ c.mensaje }}</strong><br><span style="float: right">--{{ c.fecha|date:"d M Y H:i:s"}}</span></div>
+    {% else %}
+        <div style="background-color: bisque;"><strong>{{ c.mensaje }}</strong><br><span style="float: right">--{{ c.fecha|date:"d M Y H:i:s" }}</span></div>
+    {% endif %}
+{% endfor %}
+<form action="{% url 'covenbiins:add_chat' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="destino" value="{{ otro.cedula }}"/>
+    <input type="text" name="mensaje" placeholder="mensaje">
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
+
+{% endblock %}

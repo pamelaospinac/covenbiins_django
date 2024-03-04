@@ -1,0 +1,103 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Lista de Deseos {% endblock %}
+
+{% block contenedor %}
+
+    <main class="lista">
+        <aside class="aside_lista">
+            <div class="text-center">
+                {% if reques.session.logueo.tipoUsuario == 3 %}
+                    <div>
+                        <a href="{% url 'covenbiins:publicar' %}">
+                            <i class="bi bi-plus-square-fill"></i>
+                            <p>Publicar Inmueble</p>
+                        </a>
+                    </div>
+                {% endif %}
+                <div>
+                    <a href="{% url 'covenbiins:perfil' %}">
+                        <i class="bi bi-person-fill"></i>
+                        <p>Perfil</p>
+                    </a>
+                </div>
+                <div>
+                    <i class="bi bi-envelope-fill"></i>
+                    <p>Mensajes</p>
+                </div>
+                <div>
+                    <i class="bi bi-book-half"></i>
+                    <p>Catálogo</p>
+                </div>
+                <div>
+                    <i class="bi bi-bookmark-fill"></i>
+                    <p>Lista de Deseados</p>
+                </div>
+                <div>
+                    <a href="{% url 'covenbiins:asesoria_legal' %}">
+                        <i class="bi bi-briefcase-fill"></i>
+                        <p>Asesoria Legal</p>
+                    </a>
+                </div>
+            </div>
+        </aside>
+        <div class="estructura_lista">
+            <section class="mt-1">
+                <div class="mx-auto">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Buscar">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>              
+                </div>
+            </section>
+            <section class="mt-4">
+                {% if data %}
+                    
+                    {% for l in data %}
+                        {% if forloop.first %}
+                            <div class="mx-auto mt-4 ms-4">
+                        {% endif %}
+                            <a href="{% url 'covenbiins:detalle' l.id_Inmueble %}">
+                                <div class="card m-5" style="width: 18rem; float:left;">
+                                <img src="{{ l.id_Inmueble.imagen.url }}" alt="..." class="card-img mt-2">
+                                <div class="card-body">
+                                    <p>{{ l.id_Inmueble.nombre }}</p>
+                                    <strong><p>Precio Venta:</p></strong>
+                                    <strong><p>$ {{ l.id_Inmueble.precio }}</p></strong>
+                                    <div class="separacion-informacion">
+                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                        <strong><p>Area</p></strong>
+                                        <strong><p>{{ l.id_Inmueble.area }} m2</p></strong>
+                                    </div>
+                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                        <strong><p>Hab</p></strong>
+                                        <strong><p>{{ l.id_Inmueble.habitaciones }}</p></strong>
+                                    </div>
+                                    <div class="card-text" style="width: 5rem; height: 4rem;">
+                                        <strong><p>Baños</p></strong>
+                                        <strong><p>{{ l.id_Inmueble.banos }}</p></strong>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </a>
+                        {% if forloop.counter|divisibleby:4 %}
+                            </div>
+                            <div class="mx-auto mt-4 ms-4">
+                        {% endif %}
+
+                        {% if forloop.last %}
+                            </div>
+                        {% endif %}
+
+                    {% endfor %}
+                {% else %}
+                    <h4 class="text-center">No hay Datos</h4>
+                {% endif %}
+            </section>
+        </div>
+    </main>
+
+{% endblock %}

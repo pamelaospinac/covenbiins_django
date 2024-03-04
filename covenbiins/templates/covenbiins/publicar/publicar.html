@@ -1,0 +1,74 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Publicar Inmueble {% endblock %}
+
+{% block contenedor %}
+    <div class="container">
+        <div>
+            <h2 class="text-center">Publicar Inmueble</h2>
+            <form method="post" action="{% url 'covenbiins:guardar_publicaion' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" placeholder="Digite el nombre del inmueble" name="nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">Descripcion</label>
+                    <textarea class="form-control" id="descripcion" placeholder="Digite la descripcion del inmueble" name="descripcion"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="tipoInmueble" class="form-label">Categoria</label>
+                    <select class="form-select" aria-label="Default select example" name="tipoInmueble" id="tipoInmueble">
+                        <option selected>Seleccione una opcion</option>
+                        <option value="casa">Casa</option>
+                        <option value="apartamento">Apartamento</option>
+                        <option value="lote">Lote</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" class="form-control" id="precio" placeholder="Digite el precio del inmueble" name="precio">
+                </div>
+                <div class="mb-3">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input type="text" class="form-control" id="direccion" placeholder="Digite la direccion del inmueble" name="direccion">
+                </div>
+                <div class="mb-3">
+                    <label for="ciudad" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="ciudad" placeholder="Digite la ciudad del inmueble" name="ciudad">
+                </div>
+                <div class="mb-3">
+                    <label for="categoria" class="form-label">Estado</label>
+                    <select class="form-select" aria-label="Default select example" name="categoria" id="categoria">
+                        <option selected>Seleccione una opcion</option>
+                        <option value="1">Usado</option>
+                        <option value="2">Nuevo</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="area" class="form-label">Area</label>
+                    <input type="number" class="form-control" id="area" placeholder="Digite la direccion del inmueble" name="area">
+                </div>
+                <div class="mb-3">
+                    <label for="habitaciones" class="form-label">Habitaciones</label>
+                    <input type="number" class="form-control" id="habitaciones" placeholder="Digite la direccion del inmueble" name="habitaciones">
+                </div>
+                <div class="mb-3">
+                    <label for="banos" class="form-label">Baños</label>
+                    <input type="number" class="form-control" id="banos" placeholder="Digite la direccion del inmueble" name="banos">
+                </div>
+                <div class="mb-3">
+                    <label for="estrato" class="form-label">Estrato</label>
+                    <input type="number" class="form-control" id="estrato" placeholder="Digite la direccion del inmueble" name="estrato">
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">Imagen</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen">
+                </div>
+                <button type="submit" class="btn btn-dark d-grid gap-2 mx-auto mt-2">Publicar</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Cambio Clave {% endblock %}
+
+{% block contenedor %}
+
+<form action="{% url 'covenbiins:guardar_clave' %}" method="post">
+    {% csrf_token %}
+    <div class="container-fluid w-50 pt-3 border mt-2 color-container">
+        <div class="mb-3">
+            <label>Contraseña actual:</label>
+            <input type="password" name="actual" class="form-control" value="{% if actual != ' ' %}{{ actual }}{% endif %}"/>
+        </div>
+        <div class="mb-3">
+            <label>Nueva Contraseña:</label>
+            <input type="password" name="clave1" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label>Confirmar Contraseña nueva:</label>
+            <input type="password" name="clave2" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary mb-3">Cambiar</button>
+    </div>
+</form>
+
+{% endblock %}

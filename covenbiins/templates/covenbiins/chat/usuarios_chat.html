@@ -1,0 +1,15 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Inmuebles {% endblock %}
+
+{% block contenedor %}
+
+{% for u in usuarios %}
+    <a href="{% url 'covenbiins:ver_chat' u.cedula %}"><div>{{ u.nombre }}</div></a>
+{% endfor %}
+
+
+
+{% endblock %}

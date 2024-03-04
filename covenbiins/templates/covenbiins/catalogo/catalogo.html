@@ -1,10 +1,122 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'covenbiins/base.html' %}
 
-</body>
-</html>
+{% load static %}
+
+{% block titul %} Catálogo {% endblock %}
+
+{% block contenedor %}
+  <section style="background-color: #EBEBEB;" class="p-3">
+      <p>{{ cat }}</p>
+      <form action="{% url 'covenbiins:catalogo_buscar' %}" method="post" role="search">
+        <div class="d-flex justify-content-evenly">
+          {% csrf_token %}
+          <div class="dropdown">
+            <select class="form-select" aria-label="Categoria" name="categoria">
+              <option selected>Categoria</option>
+              <option value="1">Nuevo</option>
+              <option value="2">Usado</option>
+              <option value="3">Todos</option>
+            </select>
+          </div>
+          <div class="dropdown">
+            <select class="form-select" aria-label="Tipo inmueble" name="tipoInmueble">
+              <option selected>Tipo Inmueble</option>
+              <option value="1">Apartamento</option>
+              <option value="2">Casa</option>
+              <option value="3">Lote</option>
+              <option value="4">Todos</option>
+            </select>
+          </div>
+          <div class="dropdown">
+            <select class="form-select" aria-label="Ciudad" name="ciudad">
+              <option selected>Ciudad</option>
+              <option value="1">Medellín</option>
+              <option value="2">Itagüí</option>
+              <option value="3">La Estrella</option>
+              <option value="4">Sabaneta</option>
+              <option value="5">Envigado</option>
+              <option value="6">San Jeronimo</option>
+            </select>
+          </div>
+          <button class="btn btn-primary">Buscar</button>
+        </div>
+      </form>
+    </section>
+  <main class="catalogo">
+    <aside class="aside_catalogo">
+      <p>Filtrar:</p>
+      <div class="text-center">
+        <form action="#">
+        </div>
+          <div>
+            <p>Precios desde:</p>
+            <div class="dropdown">
+              <select class="form-select" aria-label="Desde">
+                <option selected>Desde</option>
+                <option value="1">250000000</option>
+                <option value="2">350000000</option>
+                <option value="3">450000000</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-3">
+            <p>Precios hasta:</p>
+            <div class="dropdown">
+              <select class="form-select" aria-label="Hasta">
+                <option selected>Hasta</option>
+                <option value="1">250000000</option>
+                <option value="2">350000000</option>
+                <option value="3">450000000</option>
+              </select>
+            </div>
+          </div>
+          <div class="mt-4">
+            <button class="btn btn-primary">Filtrar Precios</button>
+          </div>
+        </form>
+      </div>
+    </aside>
+    <div class="estructura_catalogo">
+      <section class="ms-5">
+        {% for i in inmuebles %}
+          {% if forloop.first %}
+            <div class="mx-auto mt-4 ms-4">
+          {% endif %}
+              <a href="{% url 'covenbiins:detalle' i.id_Inmueble %}">
+                <div class="card m-5" style="width: 18rem; float:left;">
+                  <img src="{{ i.imagen.url }}" alt="..." class="card-img mt-2" id="ajuste_imagen">
+                  <div class="card-body">
+                    <p>{{ i.nombre }}</p>
+                    <strong><p>Precio Venta:</p></strong>
+                    <strong><p>$ {{ i.precio }}</p></strong>
+                    <div class="separacion-informacion">
+                      <div class="card-text" style="width: 5rem; height: 4rem;">
+                        <strong><p>Area</p></strong>
+                        <strong><p>{{ i.area }} m2</p></strong>
+                      </div>
+                      <div class="card-text" style="width: 5rem; height: 4rem;">
+                        <strong><p>Hab</p></strong>
+                        <strong><p>{{ i.habitaciones }}</p></strong>
+                      </div>
+                      <div class="card-text" style="width: 5rem; height: 4rem;">
+                        <strong><p>Baños</p></strong>
+                        <strong><p>{{ i.banos }}</p></strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+          {% if forloop.counter|divisibleby:4 %}
+            </div>
+            <div class="mx-auto mt-4 ms-4">
+          {% endif %}
+
+          {% if forloop.last %}
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      </section>
+    </div>
+  </main>
+{% endblock %}

@@ -1,5 +1,5 @@
 h1{
-    color: blue;
+    color: black;
     font-size: 1.8rem;
 }
 
@@ -103,17 +103,141 @@ button{
     margin-right: -50px;
 }
 
-.vendedor{
+.distribucion{
     display: flex;
 }
 
-.a_vendedor{
+.aside{
     background-color: #D9D9D9;
     padding: 20px;
     flex: 0.1;
+    height: 20%;
+    margin-top: 1.3%;
 }
 
-.estructura_vendedor{
+.estructura{
     flex: 1; 
     padding: 20px
+}
+
+.comprador{
+    display: flex;
+}
+
+.aside_comprador{
+    background-color: #D9D9D9;
+    padding: 20px;
+    flex: 0.1;
+    height: 20%;
+    margin-top: 1.3%;
+}
+
+.estructura_comprador{
+    flex: 1; 
+    padding: 20px
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+.catalogo{
+    display: flex;
+}
+
+.aside_catalogo{
+    background-color: #D9D9D9;
+    padding: 20px;
+    flex: 0.1;
+    height: 20%;
+    margin-top: 1.3%;
+}
+
+.estructura_catalogo{
+    flex: 1;
+    padding: 20px
+}
+
+.detalle{
+    display: flex;
+}
+
+.aside_detalle{
+    background-color: #D9D9D9;
+    padding: 40px;
+    flex: 0.1;
+    height: 20%;
+    margin-top: 5.6%;
+}
+
+.estructura_detalle{
+    flex: 1;
+    padding: 20px
+}
+
+.img-cover{
+    object-fit: cover;
+    object-position: center;
+}
+
+#foto_perfil_detalle{
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 100px;
+}
+
+#img_inmueble{
+    width: 1280px;
+    height: 720px;
+}
+
+.lista{
+    display: flex;
+}
+
+.aside_lista{
+    background-color: #D9D9D9;
+    padding: 20px;
+    flex: 0.1;
+    height: 20%;
+    margin-top: 1.3%;
+}
+
+.estructura_lista{
+    flex: 1;
+    padding: 20px
+}
+
+.asesor{
+    display: flex;
+}
+
+.aside_asesor{
+    background-color: #D9D9D9;
+    padding: 20px;
+    flex: 0.1;
+    height: 20%;
+    margin-top: 3.5%;
+}
+
+.estructura_asesor{
+    flex: 1;
+    padding: 20px
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    /* background-color: red; */
+    color: white;
+    /* text-align: center; */
+  }
+
+#ajuste_imagen{
+    width: 286px;
+    height: 160.88px;
 }
