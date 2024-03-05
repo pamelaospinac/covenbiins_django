@@ -1,0 +1,100 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Asesoria Legal {% endblock %}
+
+{% block contenedor %}
+    <main class="distribucion">
+        <aside class="aside">
+                <div class="text-center">
+                    {% if reques.session.logueo.tipoUsuario == 3 %}
+                        <div>
+                            <a href="{% url 'covenbiins:publicar' %}">
+                                <i class="bi bi-plus-square-fill"></i>
+                                <p>Publicar Inmueble</p>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <a href="{% url 'covenbiins:perfil' %}">
+                            <i class="bi bi-person-fill"></i>
+                            <p>Perfil</p>
+                        </a>
+                    </div>
+                    <div>
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>Mensajes</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'covenbiins:catalogo' %}">
+                            <i class="bi bi-book-half"></i>
+                            <p>Catálogo</p>
+                        </a>
+                    </div>
+                    <div>
+                        <i class="bi bi-bookmark-fill"></i>
+                        <p>Lista de Deseados</p>
+                    </div>
+                    <div>
+                        <a href="{% url 'covenbiins:asesoria_legal' %}">
+                            <i class="bi bi-briefcase-fill"></i>
+                            <p>Asesoria Legal</p>
+                        </a>
+                    </div>
+                </div>
+        </aside>
+        <div class="estructura">
+            <section class="mt-5">
+                <div class="container">
+                    <div class="row align-items-start">
+                            <div class="col">
+                                <h3>Mis citas</h3>
+                                <table class="table table-hover table-hover table-bordered">
+                                    <thead class="table-primary">
+                                        <tr class="text-center">
+                                            <th>Nombre Asesor</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for c in citas %}
+                                            <tr>
+                                                <td>{{ c.asesor.nombre }}</td>
+                                                <td>{{ c.horaCita }}</td>
+                                                <td>{{ c.estado }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="col-1"></div>
+                        <div class="col">
+                            <h3>Agenda una cita</h3>
+                            <form method="post" action="{% url 'covenbiins:asignar_cita' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="asesor" class="form-label">Asesor</label>
+                                    <select class="form-select" aria-label="Default select example" name="asesor" id="asesor">
+                                        <option selected>Seleccione una opcion</option>
+                                        {% for a in asesor %}
+                                            {% if a.tipoUsuario == 2 %}
+                                                <option value="{{ a.cedula }}">{{ a.nombre }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="HoraCita" class="form-label">Fecha de la Cita</label>
+                                    <input type="datetime-local" class="form-control" id="HoraCita" placeholder="Digite la fecha de la cita" name="HoraCita">
+                                </div>
+                                <button type="submit" class="btn btn-primary d-grid gap-2 mx-auto mt-2 mb-2">Agendar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+{% endblock %}

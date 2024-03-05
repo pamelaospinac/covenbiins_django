@@ -35,16 +35,17 @@
             <input type="text" class="form-control" name="direccion" aria-describedby="direccion" value="{{ data.direccion }}">
         </div>
 
-        <select name="tipo" class="form-select mb-3" aria-label="Default select example">
+        <select name="tipoInmueble" class="form-select mb-3" aria-label="Default select example">
           <option selected>Tipo Inmueble</option>
           <option value="1">Apartamento</option>
           <option value="2">Casa</option>
           <option value="3">Lote</option>
         </select>
-        <select name="usuario" class="form-select">
+        
+        <select name="cedula" class="form-select">
             <option selected>Usuario</option>
             {% for i in usuarios %}
-                <option value="{{ i.cedula }}"{% if data.Usuarios.cedula == i.cedula %}selected=""{% endif %}>{{ i.cedula }}</option>
+                <option value="{{ i.cedula }}"{% if data.cedula == i %}selected=""{% endif %}>{{ i.cedula }}</option>
             {% endfor %}
         </select>
         <br>

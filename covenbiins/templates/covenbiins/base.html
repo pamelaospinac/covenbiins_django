@@ -1,7 +1,6 @@
 {% load static %}
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -14,59 +13,116 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'covenbiins/favicon_io/favicon-16x16.png' %}">
     <!--<link rel="manifest" href="{% static 'covenbiins/favicon_io/site.webmanifest' %}">-->
 
-    <link rel="stylesheet" href="{% static 'covenbiins/css/estilos.css' %}">
     <link rel="stylesheet" href="{% static 'covenbiins/css/bootstrap.min.css' %}" />
-</head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'covenbiins/css/estilos.css' %}">
 
 <body>
+    {% if request.session.logueo.rol == 1 %}
+        <nav class="navbar navbar-expand-md navbar-light">
+            <div class="container-fluid">
+                <a href="{% url 'covenbiins:index' %}" class="navbar-brand"><img
+                        src="{% static 'covenbiins/img/logoPrincipal.png' %}" alt="logoPrincipal" width="170px"
+                        height="40px"></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="MenuNavegacion">
+                    <form class="container-fluid d-flex justify-content-end">
+                        <div id="MenuNavegacion" class="nav navbar-nav">
+                            <ul class="navbar-nav me-auto navbar">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'covenbiins:listar_inmuebles' %}">Inmuebles</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'covenbiins:listar_usuarios' %}">Usuarios</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'covenbiins:listar_citas' %}">Citas</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'covenbiins:listar_aprobaciones' %}">Aprobaciones</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'covenbiins:logout' %}">Cerrar Sesion</a>
+                                    </li>
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    {% elif request.session.logueo %}
     <nav class="navbar navbar-expand-md navbar-light">
         <div class="container-fluid">
-            <a href="{% url 'covenbiins:index' %}" class="navbar-brand"><img
-                    src="{% static 'covenbiins/img/logoPrincipal.png' %}" alt="logoPrincipal" width="170px"
-                    height="40px"></a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <a href="{% url 'covenbiins:index' %}" class="navbar-brand">
+                <img src="{% static 'covenbiins/img/logoPrincipal.png' %}" alt="logoPrincipal" width="170px" height="40px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="MenuNavegacion">
-                <form class="container-fluid d-flex justify-content-end">
-                    <div id="MenuNavegacion" class="nav navbar-nav">
-                        <ul class="navbar-nav me-auto navbar">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'covenbiins:listar_inmuebles' %}">Inmuebles</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'covenbiins:listar_usuarios' %}">Usuarios</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'covenbiins:listar_ratings' %}">Ratings</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'covenbiins:listar_citas' %}">Citas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'covenbiins:listar_aprobaciones' %}">Aprobaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"
-                                    href="{% url 'covenbiins:listar_autenticaciones' %}">Autenticaciones</a>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#myModal">Ingresar</button>
-                            </li>
-                            <li class="nav-item">
-                                <button type="button" data-bs-toggle="modal"
-                                    data-bs-target="#myModal2">Registrarse</button>
-                            </li>
-                        </ul>
-                        <form class="d-flex">
-                            <button id="boton_principal" type="button">PUBLICA TU INMUEBLE</button>
-                        </form>
-                    </div>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="ms-auto me-auto">
+                    
+                </div>
+                <form class="d-flex align-items-center" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
                 </form>
+                <div class="ms-auto me-auto">
+                    
+                </div>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Bienvenido {{ request.session.logueo.nombre }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'covenbiins:cambiar_clave' ' ' %}">Cambiar Contraseña</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'covenbiins:logout' %}">Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
+    
+    {% else %}
+        <nav class="navbar navbar-expand-md navbar-light">
+            <div class="container-fluid">
+                <a href="{% url 'covenbiins:index' %}" class="navbar-brand"><img
+                        src="{% static 'covenbiins/img/logoPrincipal.png' %}" alt="logoPrincipal" width="170px"
+                        height="40px"></a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#MenuNavegacion"
+                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="MenuNavegacion">
+                    <form class="container-fluid d-flex justify-content-end">
+                        <div id="MenuNavegacion" class="nav navbar-nav">
+                            <ul class="navbar-nav me-auto navbar">
+                                <li class="nav-item">
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#myModal" class="btn btn-outline-dark">Ingresar</button>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'covenbiins:register' %}" class="btn btn-outline-dark">Registro</a>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <button id="boton_principal" type="button">PUBLICA TU INMUEBLE</button>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    {% endif %}
     <div class="modal" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -76,7 +132,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="{% url 'covenbiins:login' %}">
+                    <form>
                         {% csrf_token %}
                         <div class="input-group">
                             <span class="input-group-text">Correo Electronico:</span>
@@ -87,55 +143,13 @@
                             <input type="password" class="form-control" id="passwordInicio">
                         </div>
                         <div class="modal-footer mt-2">
-                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                            <a href="javascript: login(`{% url 'covenbiins:login' %}`)" class="btn btn-primary">Ingresar</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="modal" id="myModal2">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Registrarse</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="/action_page.php">
-                        <div class="input-group">
-                            <span class="input-group-text">Correo electronico:</span>
-                            <input type="email" class="form-control" id="email">
-                        </div><br>
-                        <div class="input-group">
-                            <span class="input-group-text">Contraseña:</span>
-                            <input type="password" class="form-control" id="password">
-                        </div><br>
-                        <div class="input-group">
-                            <span class="input-group-text">Confirme contraseña:</span>
-                            <input type="password" class="form-control" id="Conf_password">
-                        </div><br>
-                        <div class="checkbox">
-                            <label><input type="checkbox"> Soy mayor de edad</label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Acepto términos y Condiciones
-                            </label>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" value="registrarse">Registrarme</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {% block contenedor %}
-
-    {% endblock %}
 
     {% if messages %}
         {% for message in messages %}
@@ -145,45 +159,53 @@
             <div>{{ message }}</div>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        
         {% endfor %}
     {% endif %}
 
-    <footer class="mt-4">
-        <div class="col mb-1">
-            <h6>Acerca de nosotros</h6>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Contactanos</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Preguntas Frecuentes</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col mb-1">
-            <h6>Legales</h6>
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Aviso Legal</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Terminos y Condiciones</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a href="#" class="nav-link p-0 text-muted">Politicas de tratamiento de datos</a>
-                </li>
-            </ul>
-        </div>
-        <div class="col mb-1">
-            <p>COVENBIINS</p>
-            <p class="text-muted">NIT: 896-693-412-5</p>
-            <p class="text-muted">cra 54 #35-67 Medellin</p>
-            <p class="text-muted">© 2023</p>
-        </div>
-    </footer>
+    {% block contenedor %}
+
+    {% endblock %}
+
+    {% if request.session.logueo %}
+        <footer class="mt-4">
+            <div class="col mb-1">
+                <h6>Acerca de nosotros</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-muted">Contactanos</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-muted">Preguntas Frecuentes</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col mb-1">
+                <h6>Legales</h6>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-muted">Aviso Legal</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-muted">Terminos y Condiciones</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-muted">Politicas de tratamiento de datos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col mb-1">
+                <p>COVENBIINS</p>
+                <p class="text-muted">NIT: 896-693-412-5</p>
+                <p class="text-muted">cra 54 #35-67 Medellin</p>
+                <p class="text-muted">© 2023</p>
+            </div>
+        </footer>
+    {% endif %}
    
 
     <!-- JS include start here -->
+    <script src="{% static 'covenbiins/js/jquery-3.7.1.min.js' %}"></script>
     <script src="{% static 'covenbiins/js/library.js' %}"></script>
     <script src="{% static 'covenbiins/js/bootstrap.bundle.min.js' %}"></script>
     <!-- fin - JS include -->

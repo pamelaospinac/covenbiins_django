@@ -1,0 +1,59 @@
+{% extends 'covenbiins/base.html' %}
+
+{% load static %}
+
+{% block titul %} Mensajes {% endblock %}
+
+{% block contenedor %}
+
+{% for u in usuarios %}
+    {% if request.session.logueo.rol == 3 %}
+        {% if u.tipoUsuario != 1 %}
+                <div class="d-inline-flex ms-2">
+                    <a href="{% url 'covenbiins:ver_chat' u.cedula %}">
+                        <div class="card" style="width: 15rem;">
+                            <div class="card-header">
+                                <img src="{{ u.foto.url }}" alt=".." class="card-img mt-2" id="img_mensaje">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="text-center">{{ u.nombre }} {{ u.apellido }}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+        {% endif %}
+    {% elif request.session.logueo.rol == 4 %}
+        {% if u.tipoUsuario == 3 %}
+            <div class="d-inline-flex ms-2">
+                    <a href="{% url 'covenbiins:ver_chat' u.cedula %}">
+                        <div class="card" style="width: 15rem;">
+                            <div class="card-header">
+                                <img src="{{ u.foto.url }}" alt=".." class="card-img mt-2" id="img_mensaje">
+                            </div>
+                            <div class="card-body">
+                                <h4 class="text-center">{{ u.nombre }} {{ u.apellido }}</h4>
+                            </div>
+                        </div>
+                    </a>
+            </div>
+        {% endif %}
+    {% else %}
+        {% if u.tipoUsuario != 1 %}
+            <div class="d-inline-flex ms-2">
+                <a href="{% url 'covenbiins:ver_chat' u.cedula %}">
+                    <div class="card" style="width: 15rem;">
+                        <div class="card-header">
+                            <img src="{{ u.foto.url }}" alt=".." class="card-img mt-2" id="img_mensaje">
+                        </div>
+                        <div class="card-body">
+                            <h4 class="text-center">{{ u.nombre }} {{ u.apellido }}</h4>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endfor %}
+
+
+{% endblock %}
