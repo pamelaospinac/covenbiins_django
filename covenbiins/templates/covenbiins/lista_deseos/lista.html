@@ -24,16 +24,22 @@
                     </a>
                 </div>
                 <div>
-                    <i class="bi bi-envelope-fill"></i>
-                    <p>Mensajes</p>
+                    <a href="{% url 'covenbiins:chat' %}">
+                        <i class="bi bi-envelope-fill"></i>
+                        <p>Mensajes</p>
+                    </a>
                 </div>
                 <div>
-                    <i class="bi bi-book-half"></i>
-                    <p>Catálogo</p>
+                    <a href="{% url 'covenbiins:catalogo' %}">
+                        <i class="bi bi-book-half"></i>
+                        <p>Catálogo</p>
+                    </a>
                 </div>
                 <div>
-                    <i class="bi bi-bookmark-fill"></i>
-                    <p>Lista de Deseados</p>
+                    <a href="{% url 'covenbiins:lista_deseos' %}">
+                        <i class="bi bi-bookmark-fill"></i>
+                        <p>Lista de Deseados</p>
+                    </a>
                 </div>
                 <div>
                     <a href="{% url 'covenbiins:asesoria_legal' %}">
@@ -80,6 +86,10 @@
                                         <strong><p>{{ l.id_Inmueble.banos }}</p></strong>
                                     </div>
                                     </div>
+                                    <div>
+                                        <a href="javascript:confirmar_eliminar('{% url 'covenbiins:deseo_eliminar' l.id_Lista %}');" class="btn btn-outline-danger">Eliminar</a>
+                                    </div>
+
                                 </div>
                                 </div>
                             </a>

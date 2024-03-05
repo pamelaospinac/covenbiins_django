@@ -189,8 +189,8 @@ a{
 }
 
 #img_inmueble{
-    width: 1280px;
-    height: 720px;
+    width: 100%;
+    height: auto;
 }
 
 .lista{
@@ -227,17 +227,30 @@ a{
     padding: 20px
 }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    /* background-color: red; */
-    color: white;
-    /* text-align: center; */
-  }
-
 #ajuste_imagen{
     width: 286px;
     height: 160.88px;
+}
+
+.container_chat {
+    margin:  0 auto; 
+    max-width: 800px; 
+}
+
+.mensaje_origen {
+    background-color: rgb(245, 231, 214);
+
+}
+
+.mensaje_destino {
+    background-color: rgb(189, 180, 243);
+}
+
+.filtrar_catalogo {
+    justify-content: space-evenly
+}
+
+#img_mensaje{
+    width: 201px;
+    height: 251px;
 }

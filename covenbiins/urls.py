@@ -55,8 +55,10 @@ urlpatterns = [
     path("catalogo/", views.catalogo, name="catalogo"),
     path("catalogo_buscar/", views.buscar_catalogo, name="catalogo_buscar"),
     path("detalle/<int:id_Inmueble>/", views.detalle, name="detalle"),
+
     path("lista_deseos/", views.lista_deseos, name="lista_deseos"),
     path("lista_agregar/", views.lista_agregar, name="lista_agregar"),
+    path("deseo_eliminar/<int:id_Lista>/", views.deseo_eliminar, name="deseo_eliminar"),
 
     path("chat/", views.chat, name="chat"),
     path("ver_chat/<int:cedula>/", views.ver_chat, name="ver_chat"),

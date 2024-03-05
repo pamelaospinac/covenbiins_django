@@ -639,6 +639,7 @@ def chat(request):
     
     q = Usuarios.objects.filter((~Q(pk=yo)))
     context = {"usuarios": q}
+    print(f"{q}")
     return render(request, "covenbiins/chat/usuarios_chat.html", context)
 
 
@@ -672,3 +673,14 @@ def add_chat(request):
         messages.warning(request, "No se pudo enviar el mensaje, intente de nuevo....")
     
     return HttpResponseRedirect(reverse("covenbiins:ver_chat", args=(otro,)))
+
+
+def deseo_eliminar(request, id_Lista):
+    try:
+        q = Lista.objects.get(pk=id_Lista)
+        q.delete()
+        messages.success(request, "Inmueble eliminado de tu lista de deseos")
+    except Exception as e:
+        messages.error(request, f"Error: {e}")
+
+    return HttpResponseRedirect(reverse("covenbiins:lista_deseos", args=()))

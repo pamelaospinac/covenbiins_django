@@ -5,12 +5,12 @@
 {% block titul %} Catálogo {% endblock %}
 
 {% block contenedor %}
-  <section style="background-color: #EBEBEB;" class="p-3">
+  <section style="background-color: #EBEBEB;" class="">
       <p>{{ cat }}</p>
       <form action="{% url 'covenbiins:catalogo_buscar' %}" method="post" role="search">
-        <div class="d-flex justify-content-evenly">
+        <div class="filtrar_catalogo d-flex">
           {% csrf_token %}
-          <div class="dropdown">
+          <div class="dropdown mt-3 mb-3">
             <select class="form-select" aria-label="Categoria" name="categoria">
               <option selected>Categoria</option>
               <option value="1">Nuevo</option>
@@ -18,7 +18,7 @@
               <option value="3">Todos</option>
             </select>
           </div>
-          <div class="dropdown">
+          <div class="dropdown mt-3 mb-3">
             <select class="form-select" aria-label="Tipo inmueble" name="tipoInmueble">
               <option selected>Tipo Inmueble</option>
               <option value="1">Apartamento</option>
@@ -27,7 +27,7 @@
               <option value="4">Todos</option>
             </select>
           </div>
-          <div class="dropdown">
+          <div class="dropdown mt-3 mb-3">
             <select class="form-select" aria-label="Ciudad" name="ciudad">
               <option selected>Ciudad</option>
               <option value="1">Medellín</option>
@@ -38,7 +38,7 @@
               <option value="6">San Jeronimo</option>
             </select>
           </div>
-          <button class="btn btn-primary">Buscar</button>
+          <button class="btn btn-primary mt-3 mb-3">Buscar</button>
         </div>
       </form>
     </section>

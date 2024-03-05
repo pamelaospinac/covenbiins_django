@@ -10,7 +10,7 @@
             <p>¡Estoy Interesado!</p>
             <div>
                 <p>Contacta al vendedor</p>
-                <button class="btn btn-primary">IR AL CHAT</button>
+                <a href="{% url 'covenbiins:ver_chat' data.cedula %}" class="btn btn-primary">IR AL CHAT</a>
                 <div class="d-inline-flex mt-3">
                     <div class="d-inline-flex">
                         <img src="{{data.cedula.foto.url}}" alt="...." id="foto_perfil_detalle">
