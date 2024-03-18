@@ -8,7 +8,7 @@
     <div class="container">
         <div>
             <h2 class="text-center">Publicar Inmueble</h2>
-            <form method="post" action="{% url 'covenbiins:guardar_publicaion' %}">
+            <form method="post" action="{% url 'covenbiins:guardar_publicaion' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="imagen" class="form-label">Imagen</label>
-                    <input type="file" class="form-control" id="imagen" name="imagen">
+                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*" multiple>
                 </div>
                 <button type="submit" class="btn btn-dark d-grid gap-2 mx-auto mt-2">Publicar</button>
             </form>

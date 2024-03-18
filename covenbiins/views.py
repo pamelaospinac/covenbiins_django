@@ -2,6 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 
+import datetime
+
 from django.db.models import Q
 
 from django.contrib import messages
@@ -12,13 +14,13 @@ from .models import *
 # Create your views here.
 
 
-def register(request): #Aqui se redirecciona al form del registro
+def register(request):  # Aqui se redirecciona al form del registro
     result = Usuarios.objects.all()
     context = {"usuarios": result}
     return render(request, "covenbiins/register.html", context)
 
 
-def register_guardar(request): #Aqui se hace el proceso de registro
+def register_guardar(request):  # Aqui se hace el proceso de registro
     if request.method == "POST":
         cedula = request.POST.get("cedula")
         nom = request.POST.get("nombre")
@@ -50,7 +52,7 @@ def register_guardar(request): #Aqui se hace el proceso de registro
         return HttpResponseRedirect(reverse("covenbiins:register"))
 
 
-def login(request): # Aqui se hace el proceso de login
+def login(request):  # Aqui se hace el proceso de login
     if request.method == "POST":
         email = request.POST.get("email")
         contrasena = request.POST.get("contrasena")
@@ -75,7 +77,7 @@ def login(request): # Aqui se hace el proceso de login
         pass
 
 
-def logout(request): #Aqui se hace el proceso de cerrar sesion
+def logout(request):  # Aqui se hace el proceso de cerrar sesion
     try:
         del request.session["logueo"]
         messages.success(request, "Sesion Cerrada")
@@ -84,7 +86,7 @@ def logout(request): #Aqui se hace el proceso de cerrar sesion
     return HttpResponseRedirect(reverse("covenbiins:index"))
 
 
-def index(request): #Aqui se redirecciona a la vista principal y se manda la informacion necesaria
+def index(request):  # Aqui se redirecciona a la vista principal y se manda la informacion necesaria
     if request.session.get("logueo", False):
         usuario = request.session.get("logueo", False)
         q = Usuarios.objects.get(pk=usuario["cedula"])
@@ -95,15 +97,15 @@ def index(request): #Aqui se redirecciona a la vista principal y se manda la inf
         return render(request, "covenbiins/index.html", context)
     else:
         return render(request, "covenbiins/index.html")
-    
 
-def cambiar_clave(request, actual): #Aqui se redirecciona al form de cambio de clave
-    context= {"actual": actual}
-    
+
+def cambiar_clave(request, actual):  # Aqui se redirecciona al form de cambio de clave
+    context = {"actual": actual}
+
     return render(request, "covenbiins/usuarios/cambio_clave.html", context)
 
 
-def guardar_clave(request): #Aqui se hace el proceso de cambio de clave
+def guardar_clave(request):  # Aqui se hace el proceso de cambio de clave
     usuario = request.session.get("logueo", False)
     if usuario:
         if request.method == "POST":
@@ -127,14 +129,14 @@ def guardar_clave(request): #Aqui se hace el proceso de cambio de clave
         return HttpResponseRedirect(reverse("covenbiins:index"))
 
 
-def ver_perfil(request): #Aqui redirecciona al el perfil del usuario y manda la informacion necesaria 
+def ver_perfil(request):  # Aqui redirecciona al el perfil del usuario y manda la informacion necesaria
     usuario = request.session.get("logueo", False)
     q = Usuarios.objects.get(pk=usuario["cedula"])
     contexto = {"data": q}
     return render(request, "covenbiins/usuarios/perfil.html", contexto)
 
 
-#Creacion del crud de cada Tabla de la BD
+# Creacion del crud de cada Tabla de la BD
 def inmuebles(request):
     result = Inmuebles.objects.all()
     context = {"data": result}
@@ -460,15 +462,23 @@ def aprobaciones_eliminar(request, id_Aprobacion):
         messages.error(request, f"Error: {e}")
 
     return HttpResponseRedirect(reverse("covenbiins:listar_aprobaciones", args=()))
+
+
 # Aqui termina
 
-def publicar_inmueble(request): #Aqui redirecciona al form de publicar inmueble 
+def publicar_inmueble(request):  # Aqui redirecciona al form de publicar inmueble
     result = Inmuebles.objects.all()
     context = {"inmuebles": result}
     return render(request, "covenbiins/publicar/publicar.html", context)
 
 
-def publicacion_guardar(request): #Aqui hace el proceso de creacion y guardado
+def upload_file(f, nuevo_nombre):
+    with open(f"uploads/fotos_inmuebles/{nuevo_nombre}", "wb+") as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
+def publicacion_guardar(request):  # Aqui hace el proceso de creacion y guardado
     usuario = request.session.get("logueo", False)
     if request.method == "POST":
         q = Usuarios.objects.get(pk=usuario["cedula"])
@@ -483,7 +493,17 @@ def publicacion_guardar(request): #Aqui hace el proceso de creacion y guardado
         habit = request.POST.get("habitaciones")
         banos = request.POST.get("banos")
         estrato = request.POST.get("estrato")
-        img = request.POST.get("imagen")
+        img = request.FILES.get("imagen")
+        if img is not None:
+            ahora = datetime.datetime.now()
+            print(ahora)
+            ahora = str(ahora).replace("-", "").replace(":", "").replace(".", "_")
+            print(ahora)
+            nombre_foto = img.name.rsplit('.', 1)
+            nuevo_nombre = f"{nombre_foto[0]}_{ahora}.{nombre_foto[1]}"
+            upload_file(img, nuevo_nombre)
+        else:
+            nuevo_nombre = "default.png"
         try:
             inm = Inmuebles(
                 nombre=nomb,
@@ -491,13 +511,13 @@ def publicacion_guardar(request): #Aqui hace el proceso de creacion y guardado
                 descripcion=desc,
                 precio=prec,
                 direccion=direc,
-                categoria = est,
-                ciudad = ciu,
+                categoria=est,
+                ciudad=ciu,
                 area=area,
                 habitaciones=habit,
                 banos=banos,
-                estrato = estrato,
-                imagen=img,
+                estrato=estrato,
+                imagen=f"fotos_inmuebles/{nuevo_nombre}",
                 cedula=q
             )
             inm.save()
@@ -511,7 +531,7 @@ def publicacion_guardar(request): #Aqui hace el proceso de creacion y guardado
         return HttpResponseRedirect(reverse("covenbiins:publicar"))
 
 
-def asesoria_legal(request): #Aqui redirecciona a ver tus citas, el form para asignar y manda la informacion necesaria
+def asesoria_legal(request):  # Aqui redirecciona a ver tus citas, el form para asignar y manda la informacion necesaria
     usuario = request.session.get("logueo", False)
     q = Usuarios.objects.get(pk=usuario["cedula"])
     result = Citas.objects.filter(usuario=q)
@@ -520,7 +540,7 @@ def asesoria_legal(request): #Aqui redirecciona a ver tus citas, el form para as
     return render(request, "covenbiins/asesoria_legal/index.html", context)
 
 
-def asignar_cita(request): # Aqui crea y guarda la cita
+def asignar_cita(request):  # Aqui crea y guarda la cita
     usuario = request.session.get("logueo", False)
     if request.method == "POST":
         q = Usuarios.objects.get(pk=usuario["cedula"])
@@ -542,7 +562,7 @@ def asignar_cita(request): # Aqui crea y guarda la cita
     return HttpResponseRedirect(reverse("covenbiins:asesoria_legal"))
 
 
-def catalogo(request): #Aqui redirecciona a la vista de catalalogo y manda la informacionde la BD necesaria
+def catalogo(request):  # Aqui redirecciona a la vista de catalalogo y manda la informacionde la BD necesaria
     if request.session.get("logueo", False):
         i = Inmuebles.objects.all()
         context = {"inmuebles": i}
@@ -556,8 +576,7 @@ def buscar_catalogo(request):
         tip = request.POST.get("tipoInmueble")
         cid = request.POST.get("ciudad")
 
-
-        c = Inmuebles.objects.filter(id_Inmueble__icontains={cat,tip,cid})
+        c = Inmuebles.objects.filter(id_Inmueble__icontains={cat, tip, cid})
 
         context = {"cat": c, "buscado": {cat, tip, cid}}
         return render(request, "covenbiins/catalogo/catalogo.html", context)
@@ -566,14 +585,20 @@ def buscar_catalogo(request):
     return HttpResponseRedirect(reverse("covenbiins:catalogo", args=()))
 
 
-def detalle(request, id_Inmueble): #Aqui redirecciona a la vista de detalle y manda la informacion necesaria
+def detalle(request, id_Inmueble):  # Aqui redirecciona a la vista de detalle y manda la informacion necesaria
     q = Inmuebles.objects.get(pk=id_Inmueble)
+    #q.cedula = int(q.Usuarios.cedula)
+    print(type(q.cedula.cedula))
+    user = request.session.get("logueo", False)
+    print(type(user["cedula"]))
+    if q.cedula.cedula == user["cedula"]:
+        print("Holap")
     query = Usuarios.objects.all()
     context = {"id": id_Inmueble, "data": q, "usuarios": query}
     return render(request, "covenbiins/catalogo/detalle.html", context)
 
 
-def lista_agregar(request): #Guarda el inmueble en una lista de deseos
+def lista_agregar(request):  # Guarda el inmueble en una lista de deseos
     if request.session.get("logueo", False):
         usuario = request.session.get("logueo", False)
         if request.method == "POST":
@@ -582,8 +607,8 @@ def lista_agregar(request): #Guarda el inmueble en una lista de deseos
             try:
                 inm_id = Inmuebles.objects.get(pk=inm)
                 list = Lista(
-                    id_Inmueble = inm_id,
-                    cedula = q
+                    id_Inmueble=inm_id,
+                    cedula=q
                 )
                 list.save()
                 messages.success(request, f"Guardado")
@@ -592,21 +617,22 @@ def lista_agregar(request): #Guarda el inmueble en una lista de deseos
         return render(request, "covenbiins/catalogo/detalle.html")
 
 
-def lista_deseos(request): #Muestra los inmuebles que el usuario guarde en la lista de deseos
+def lista_deseos(request):  # Muestra los inmuebles que el usuario guarde en la lista de deseos
     if request.session.get("logueo", False):
         usuario = request.session.get("logueo", False)
         q = Usuarios.objects.get(pk=usuario["cedula"])
         inm = Lista.objects.filter(cedula=q)
         context = {"data": inm}
         return render(request, "covenbiins/lista_deseos/lista.html", context)
-    
 
-def form_informe(request, id_Citas): #Redirecciona al from informe
+
+def form_informe(request, id_Citas):  # Redirecciona al from informe
     c = Citas.objects.get(pk=id_Citas)
-    context = {"c":c}
+    context = {"c": c}
     return render(request, "covenbiins/asesoria_legal/informe.html", context)
 
-def generar_informe(request): #Crea y guarda la informacion del informe
+
+def generar_informe(request):  # Crea y guarda la informacion del informe
     if request.session.get("logueo", False):
         usuario = request.session.get("logueo", False)
         if request.method == "POST":
@@ -616,15 +642,15 @@ def generar_informe(request): #Crea y guarda la informacion del informe
             nomb = request.POST.get("nombre")
             cat = request.POST.get("categoria")
             fecha = request.POST.get("fecha")
-            desc =  request.POST.get("descripcion")
+            desc = request.POST.get("descripcion")
             try:
                 inf = Informe(
-                    nombreInforme = nomb,
-                    inmueble = cat,
-                    fechaInforme = fecha,
-                    descripcion = desc,
-                    citas = i,
-                    cedula = q
+                    nombreInforme=nomb,
+                    inmueble=cat,
+                    fechaInforme=fecha,
+                    descripcion=desc,
+                    citas=i,
+                    cedula=q
                 )
                 inf.save()
                 messages.success(request, "Informe Generado")
@@ -632,14 +658,14 @@ def generar_informe(request): #Crea y guarda la informacion del informe
             except Exception as e:
                 messages.error(request, f"Error: {e}")
                 return render(request, "covenbiins/asesoria_legal/informe.html")
-                
+
+
 def chat(request):
     usuario = request.session.get("logueo", False)
     yo = Usuarios.objects.get(pk=usuario["cedula"])
-    
+
     q = Usuarios.objects.filter((~Q(pk=yo)))
     context = {"usuarios": q}
-    print(f"{q}")
     return render(request, "covenbiins/chat/usuarios_chat.html", context)
 
 
@@ -648,8 +674,9 @@ def ver_chat(request, cedula):
 
     yo = Usuarios.objects.get(pk=usuario["cedula"])
     otro = Usuarios.objects.get(pk=cedula)
-    
-    q = Chat.objects.filter(Q(usuario_origen = yo, usuario_destino=otro) | Q(usuario_origen = otro, usuario_destino=yo)).order_by('fecha')
+
+    q = Chat.objects.filter(
+        Q(usuario_origen=yo, usuario_destino=otro) | Q(usuario_origen=otro, usuario_destino=yo)).order_by('fecha')
 
     context = {"chat": q, "otro": otro}
     return render(request, "covenbiins/chat/ver_chat.html", context)
@@ -663,15 +690,15 @@ def add_chat(request):
     mensaje = request.POST.get("mensaje")
     try:
         q = Chat(
-            mensaje = mensaje,
-            usuario_origen = yo,
-            usuario_destino = otro
+            mensaje=mensaje,
+            usuario_origen=yo,
+            usuario_destino=otro
         )
         q.save()
         messages.success(request, "Mensaje enviado!!")
     except Exception as e:
         messages.warning(request, "No se pudo enviar el mensaje, intente de nuevo....")
-    
+
     return HttpResponseRedirect(reverse("covenbiins:ver_chat", args=(otro,)))
 
 

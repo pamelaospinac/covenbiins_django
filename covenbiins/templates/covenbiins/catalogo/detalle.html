@@ -10,7 +10,12 @@
             <p>¡Estoy Interesado!</p>
             <div>
                 <p>Contacta al vendedor</p>
-                <a href="{% url 'covenbiins:ver_chat' data.cedula %}" class="btn btn-primary">IR AL CHAT</a>
+                {% if request.session.logueo.cedula == data.cedula.cedula %}
+                    <a href="#" class="btn btn-primary">EDITAR</a>
+                    <a href="#" class="btn btn-primary">ELIMINAR</a>
+                {% else %}
+                    <a href="{% url 'covenbiins:ver_chat' data.cedula %}" class="btn btn-primary">IR AL CHAT</a>
+                {% endif %}
                 <div class="d-inline-flex mt-3">
                     <div class="d-inline-flex">
                         <img src="{{data.cedula.foto.url}}" alt="...." id="foto_perfil_detalle">
@@ -34,7 +39,7 @@
                     </form> 
                     <div class="container d-inline-flex p-3" style="background-color: #ebebeb;">
                         <div>
-                            <p>$ {{data.precio}}</p>
+                            <p>$ {{data.precio}} </p>
                             <p>Precio de venta</p>
                         </div>
                         <div class="container d-inline-flex ms-5 align-items-center">

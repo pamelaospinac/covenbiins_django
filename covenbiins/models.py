@@ -20,7 +20,7 @@ class Inmuebles(models.Model):
     area = models.IntegerField()
     habitaciones = models.IntegerField()
     banos = models.IntegerField()
-    estrato = models.IntegerField(null= True)
+    estrato = models.IntegerField(null=True)
     imagen = models.ImageField(default="fotos_inmuebles/default.png", upload_to='fotos_inmuebles')
     cedula = models.ForeignKey('Usuarios', on_delete=models.DO_NOTHING)
 
@@ -72,19 +72,22 @@ class Citas(models.Model):
     asesor = models.ForeignKey('Usuarios', on_delete=models.CASCADE, related_name='AsesorFk')
     estado = models.IntegerField(choices=ESTADO, default=1)
 
+
 class Lista(models.Model):
-    id_Lista  = models.BigAutoField(primary_key=True, blank=True)
+    id_Lista = models.BigAutoField(primary_key=True, blank=True)
     id_Inmueble = models.ForeignKey('Inmuebles', on_delete=models.DO_NOTHING)
     cedula = models.ForeignKey('Usuarios', on_delete=models.DO_NOTHING)
 
+
 class Informe(models.Model):
-    id_Informe = models.BigAutoField(primary_key=True, blank=True) 
+    id_Informe = models.BigAutoField(primary_key=True, blank=True)
     nombreInforme = models.CharField(max_length=50)
     inmueble = models.CharField(max_length=50)
     fechaInforme = models.DateField()
     descripcion = models.CharField(max_length=3500)
     citas = models.ForeignKey('Citas', on_delete=models.DO_NOTHING)
     cedula = models.ForeignKey('Usuarios', on_delete=models.DO_NOTHING, null=True)
+
 
 class Chat(models.Model):
     fecha = models.DateTimeField(auto_now_add=True, blank=True)
