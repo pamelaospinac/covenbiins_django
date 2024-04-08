@@ -63,6 +63,7 @@ urlpatterns = [
     path("chat/", views.chat, name="chat"),
     path("ver_chat/<int:cedula>/", views.ver_chat, name="ver_chat"),
     path("add_chat/", views.add_chat, name="add_chat"),
-    
+
+    path("recuperar_cuenta/", views.recuperar_cuenta, name="recuperar_cuenta"),
 ]
 

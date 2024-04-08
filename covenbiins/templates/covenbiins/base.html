@@ -142,6 +142,9 @@
                             <span class="input-group-text">Contraseña:</span>
                             <input type="password" class="form-control" id="passwordInicio">
                         </div>
+                        <div class="mt-1">
+                            <a href="{% url 'covenbiins:recuperar_cuenta' %}" class="text-left">¿Olvidaste tu contraseña?</a>
+                        </div>
                         <div class="modal-footer mt-2">
                             <a href="javascript: login(`{% url 'covenbiins:login' %}`)" class="btn btn-primary">Ingresar</a>
                         </div>

@@ -1,0 +1,27 @@
+{% extends "covenbiins/base.html" %}
+
+{% load static %}
+
+{% block titul %} Registro {% endblock %}
+
+{% block contenedor %}
+
+<body class="registro">
+    <div class="container mt-5 mb-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Recuperar Cuenta</h2>
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="Digite su email" name="email">
+                    </div>
+                    <button type="submit" class="btn btn-primary d-grid gap-2 mx-auto">Enviar Correo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

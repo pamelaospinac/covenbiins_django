@@ -7,7 +7,9 @@ import datetime
 from django.db.models import Q
 
 from django.contrib import messages
+from django.core.mail import BadHeaderError, EmailMessage
 
+from covenbiins_django import settings
 from .models import *
 
 
@@ -555,6 +557,26 @@ def asignar_cita(request):  # Aqui crea y guarda la cita
             )
             cita.save()
             messages.success(request, "La cita fue asignada correctamente")
+            try:
+                destinatario = "emmaupegui2005@gmail.com"
+                mensaje = f"""
+                            <h1> Cita Asignada </h1>
+                            <strong> Asesor: {cita.asesor.nombre} </strong>
+                            <h3>Hora cita: {cita.horaCita}</h3>
+                            <p>Recuerda que si quires cancelar la cita, debes hacerlo <strong>maximo 3 horas</strong> antes de la misma.</p><br>
+                            <strong>Si deseas cancelar la cita dar click al siguiente botón:</strong><br><br>
+                            <button class="btn btn-danger">Cancelar Cita</button>
+                        """
+                try:
+                    msg = EmailMessage("Confirmacion Cita", mensaje, settings.EMAIL_HOST_USER, [destinatario])
+                    msg.content_subtype = "html"
+                    msg.send()
+                except BadHeaderError:
+                    print("Invalied header found.")
+                except Exception as e:
+                    print(f"error{e}")
+            except Exception as e:
+                messages.error(request, f"Error {e}")
         except Exception as e:
             messages.error(request, f"Error {e}")
     else:
@@ -587,7 +609,7 @@ def buscar_catalogo(request):
 
 def detalle(request, id_Inmueble):  # Aqui redirecciona a la vista de detalle y manda la informacion necesaria
     q = Inmuebles.objects.get(pk=id_Inmueble)
-    #q.cedula = int(q.Usuarios.cedula)
+    # q.cedula = int(q.Usuarios.cedula)
     print(type(q.cedula.cedula))
     user = request.session.get("logueo", False)
     print(type(user["cedula"]))
@@ -711,3 +733,19 @@ def deseo_eliminar(request, id_Lista):
         messages.error(request, f"Error: {e}")
 
     return HttpResponseRedirect(reverse("covenbiins:lista_deseos", args=()))
+
+
+def recuperar_cuenta(request):
+    if request.method == "POST":
+        correo = request.POST.get('email')
+        try:
+            q = Usuarios.objects.get(email=correo)
+            if q == correo:
+                recuperar = True
+            else:
+                recuperar= False
+        except Exception as e:
+            return render(request, "covenbiins/index.html")
+
+
+    return render(request, "covenbiins/recuperar_cuenta.html")
